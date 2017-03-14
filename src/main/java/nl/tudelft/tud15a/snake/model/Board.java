@@ -27,6 +27,8 @@ public class Board extends JPanel implements ActionListener {
     private Image bodyImage;
     private Image appleImage;
     private Image headImage;
+    private int borderThickness=5;
+    private ImageIcon ic;
 
     public Board() {
 
@@ -40,6 +42,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void loadImages() {
+    	ic = new ImageIcon("src/main/java/nl/tudelft/tud15a/snake/view/images/body.jpg");
         bodyImage = new ImageIcon("src/main/java/nl/tudelft/tud15a/snake/view/images/body.jpg").getImage();
         headImage = new ImageIcon("src/main/java/nl/tudelft/tud15a/snake/view/images/head.jpg").getImage();
         appleImage = new ImageIcon("src/main/java/nl/tudelft/tud15a/snake/view/images/apple.png").getImage();
@@ -67,11 +70,12 @@ public class Board extends JPanel implements ActionListener {
         if (inGame) {
 
         	//Borders of the Fields
+        	borderThickness = ic.getIconHeight();
         	g.setColor(Color.GREEN);
-        	g.drawRect(0,0, Constants.WIDTH, 5);
-        	g.drawRect(0,Constants.HEIGHT, Constants.WIDTH, 5);
-        	g.drawRect(0,0, 5, Constants.HEIGHT);
-        	g.drawRect(Constants.WIDTH,0, 5, Constants.HEIGHT);
+        	g.drawRect(0,0, Constants.WIDTH, borderThickness);
+        	g.drawRect(0,Constants.HEIGHT-borderThickness, Constants.WIDTH, borderThickness);
+        	g.drawRect(0,0, borderThickness, Constants.HEIGHT);
+        	g.drawRect(Constants.WIDTH-borderThickness,0,borderThickness, Constants.HEIGHT);
         	
 
 
@@ -113,24 +117,25 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void checkCollision() {
+    	int bodySize = ic.getIconHeight();
 
         if(snake.isEatingYourself()) {
         	inGame = false;
         }
 
-        if (snake.getHead().getY() >= Constants.HEIGHT) {
+        if (snake.getHead().getY() >= Constants.HEIGHT-this.borderThickness-bodySize) {
             inGame = false;
         }
 
-        if (snake.getHead().getY() < 0) {
+        if (snake.getHead().getY() < this.borderThickness) {
             inGame = false;
         }
 
-        if (snake.getHead().getX() >= Constants.WIDTH) {
+        if (snake.getHead().getX() >= Constants.WIDTH-this.borderThickness-bodySize) {
             inGame = false;
         }
 
-        if (snake.getHead().getX() < 0) {
+        if (snake.getHead().getX() < this.borderThickness) {
             inGame = false;
         }
         
