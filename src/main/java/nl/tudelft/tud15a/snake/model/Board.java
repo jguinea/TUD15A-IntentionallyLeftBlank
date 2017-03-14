@@ -140,41 +140,6 @@ public class Board extends JPanel implements ActionListener {
         g.drawString(msg3, (Constants.WIDTH - metr.stringWidth(msg3)) / 2, (Constants.HEIGHT / 2)+15);
     }
 
-    /*private void checkCollision() {
-    	int bodySize = ic.getIconHeight();
-
-        if(model.getSnake().isEatingYourself()) {
-        	inGame = State.GAME_OVER;
-        }
-
-<<<<<<< HEAD
-        if (snake.getHead().getY() >= Constants.HEIGHT-this.borderThickness) {
-            inGame = false;
-        }
-
-        if (snake.getHead().getY() < this.borderThickness) {
-            inGame = false;
-
-        }
-            
-
-<<<<<<< HEAD
-        if (snake.getHead().getX() >= Constants.WIDTH-this.borderThickness) {
-            inGame = false;
-        }
-
-        if (snake.getHead().getX() < this.borderThickness) {
-            inGame = false;
-=======
-
->>>>>>> master
-        }
-        
-        if(inGame == State.GAME_OVER) {
-            timer.stop();
-        }
-    }*/
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
