@@ -29,7 +29,7 @@ public class Model {
         	inGame = State.GAME_OVER;;
         }
 
-        if (snake.getHead().getY() >= Constants.HEIGHT) {
+        if (snake.getHead().getY() >= Settings.HEIGHT) {
             inGame = State.GAME_OVER;;
         }
 
@@ -37,7 +37,7 @@ public class Model {
             inGame = State.GAME_OVER;;
         }
 
-        if (snake.getHead().getX() >= Constants.WIDTH) {
+        if (snake.getHead().getX() >= Settings.WIDTH) {
             inGame = State.GAME_OVER;;
         }
 

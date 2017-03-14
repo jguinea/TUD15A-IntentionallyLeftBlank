@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Snake {
-    public List<Position> position = new ArrayList<Position>(Constants.ALL_CELLS);
+    public List<Position> position = new ArrayList<Position>(Settings.ALL_CELLS);
     private Direction direction;
     private int size;
     public Snake() {
@@ -40,19 +40,19 @@ public class Snake {
         }
 
         if (direction == direction.LEFT) {
-        	getHead().setX(getHead().getX() - Constants.CELL_SIZE);
+        	getHead().setX(getHead().getX() - Settings.CELL_SIZE);
         }
 
         if (direction == direction.RIGHT) {
-        	getHead().setX(getHead().getX() + Constants.CELL_SIZE);
+        	getHead().setX(getHead().getX() + Settings.CELL_SIZE);
         }
 
         if (direction == direction.UP) {
-        	getHead().setY(getHead().getY() - Constants.CELL_SIZE);
+        	getHead().setY(getHead().getY() - Settings.CELL_SIZE);
         }
 
         if (direction == direction.DOWN) {
-        	getHead().setY(getHead().getY() + Constants.CELL_SIZE);
+        	getHead().setY(getHead().getY() + Settings.CELL_SIZE);
         }
     }
 
