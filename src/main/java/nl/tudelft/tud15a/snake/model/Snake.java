@@ -6,10 +6,8 @@ import java.util.List;
 public class Snake {
     public List<Position> position = new ArrayList<Position>(Constants.ALL_CELLS);
     private int size;
-
     public Snake() {
     	size = 3;
-
 	    for (int z = 0; z < size; z++) {
 	        position.add(new Position(50 - z * 10, 50));
 	    }
@@ -63,5 +61,8 @@ public class Snake {
             }
     	}
     	return false;
+    }
+    public int getPoint(){
+    	return (this.size-3)*10;
     }
 }
