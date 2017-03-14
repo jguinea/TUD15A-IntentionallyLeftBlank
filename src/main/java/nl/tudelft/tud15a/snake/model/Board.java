@@ -20,7 +20,7 @@ public class Board extends JPanel implements ActionListener {
     Snake snake;
     private Apple apple;
 
-    private Direction direction = Direction.RIGHT;
+    private Direction direction;
     private boolean inGame = true;
 
     private Timer timer;
@@ -52,6 +52,7 @@ public class Board extends JPanel implements ActionListener {
 
         snake = new Snake();
         apple = new Apple();
+        direction = Direction.RIGHT;
 
         timer = new Timer(Constants.DELAY, this);
         timer.start();
