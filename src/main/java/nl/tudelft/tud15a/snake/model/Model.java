@@ -5,7 +5,7 @@ import javax.swing.Timer;
 public class Model {
     Snake snake;
     private Apple apple;
-    private boolean inGame = true;
+    private State inGame = State.START_SCREEN;
 
     public Model() {
 
@@ -13,7 +13,7 @@ public class Model {
         apple = new Apple();
     }
 
-    private void checkApple() {
+    public void checkApple() {
 
         if ((snake.getHead().getX() == apple.getPosition().getX()) && (snake.getHead().getY() == apple.getPosition().getY())) {
 
@@ -23,31 +23,43 @@ public class Model {
         }
     }
 
-    private void checkCollision() {
+    public void checkCollision() {
 
         if(snake.isEatingYourself()) {
-        	inGame = false;
+        	inGame = State.GAME_OVER;;
         }
 
         if (snake.getHead().getY() >= Constants.HEIGHT) {
-            inGame = false;
+            inGame = State.GAME_OVER;;
         }
 
         if (snake.getHead().getY() < 0) {
-            inGame = false;
+            inGame = State.GAME_OVER;;
         }
 
         if (snake.getHead().getX() >= Constants.WIDTH) {
-            inGame = false;
+            inGame = State.GAME_OVER;;
         }
 
         if (snake.getHead().getX() < 0) {
-            inGame = false;
+            inGame = State.GAME_OVER;;
         }
-        
-        if(!inGame) {
-            //timer.stop();
-        }
+
     }
 
+    public State getState() {
+    	return inGame;
+    }
+
+    public void setState(State state) {
+    	inGame = state;
+    }
+
+    public Snake getSnake() {
+    	return snake;
+    }
+
+    public Apple getApple() {
+    	return apple;
+    }
 }

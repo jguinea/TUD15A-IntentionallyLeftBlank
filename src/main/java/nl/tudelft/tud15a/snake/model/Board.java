@@ -17,12 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener {
-    Snake snake;
-    private Apple apple;
+    Model model = new Model();
 
     private Direction direction;
-    private State inGame = State.START_SCREEN;
-
 
     private Timer timer;
     private Image bodyImage;
@@ -51,8 +48,7 @@ public class Board extends JPanel implements ActionListener {
 
     private void initGame() {
 
-        snake = new Snake();
-        apple = new Apple();
+        model = new Model();
         direction = Direction.RIGHT;
 
         timer = new Timer(Constants.DELAY, this);
@@ -68,13 +64,13 @@ public class Board extends JPanel implements ActionListener {
     
     private void doDrawing(Graphics g) {
     	
-    	if(inGame==State.START_SCREEN){
+    	if(model.getState()==State.START_SCREEN){
     		startScreen(g);
     	}
         
-    	else if (inGame==State.PLAYING) {
+    	else if (model.getState()==State.PLAYING) {
         	////
-        	String scores="Score: "+snake.getPoint();
+        	String scores="Score: "+model.getSnake().getPoint();
         	Font small = new Font("Helvetica", Font.BOLD, 14);
         	g.setColor(Color.white);
             g.setFont(small);
@@ -91,13 +87,13 @@ public class Board extends JPanel implements ActionListener {
 
 
 
-            g.drawImage(appleImage, apple.getPosition().getX(),
-            									apple.getPosition().getY(), this);
+            g.drawImage(appleImage, model.getApple().getPosition().getX(),
+            		model.getApple().getPosition().getY(), this);
 
-            for(Position pos : snake.getPosition()) {
+            for(Position pos : model.getSnake().getPosition()) {
             	g.drawImage(bodyImage, pos.getX(), pos.getY(), this);
             }
-            g.drawImage(headImage, snake.getHead().getX(), snake.getHead().getY(), this);
+            g.drawImage(headImage, model.getSnake().getHead().getX(), model.getSnake().getHead().getY(), this);
 
             Toolkit.getDefaultToolkit().sync();
 
@@ -110,7 +106,7 @@ public class Board extends JPanel implements ActionListener {
     private void gameOver(Graphics g) {
 
         String msg = "Game Over";
-        String msg2 = "\nScore: "+snake.getPoint();
+        String msg2 = "\nScore: "+model.getSnake().getPoint();
         String msg3="Click Spacebar to Restart the Game";
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr = getFontMetrics(small);
@@ -136,21 +132,11 @@ public class Board extends JPanel implements ActionListener {
         g.drawString(msg, (Constants.WIDTH - metr.stringWidth(msg)) / 2, (Constants.HEIGHT / 2)-25);
         g.drawString(msg3, (Constants.WIDTH - metr.stringWidth(msg3)) / 2, (Constants.HEIGHT / 2)+15);
     }
-    
-    private void checkApple() {
 
-        if ((snake.getHead().getX() == apple.getPosition().getX()) && (snake.getHead().getY() == apple.getPosition().getY())) {
-
-            snake.eatApple();
-
-            apple.locate();
-        }
-    }
-
-    private void checkCollision() {
+    /*private void checkCollision() {
     	int bodySize = ic.getIconHeight();
 
-        if(snake.isEatingYourself()) {
+        if(model.getSnake().isEatingYourself()) {
         	inGame = State.GAME_OVER;
         }
 
@@ -174,16 +160,16 @@ public class Board extends JPanel implements ActionListener {
         if(inGame == State.GAME_OVER) {
             timer.stop();
         }
-    }
+    }*/
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (inGame == State.PLAYING) {
+        if (model.getState() == State.PLAYING) {
 
-            checkApple();
-            checkCollision();
-            snake.move(direction);
+            model.checkApple();
+            model.checkCollision();
+            model.getSnake().move(direction);
         }
 
         repaint();
@@ -196,25 +182,25 @@ public class Board extends JPanel implements ActionListener {
         	
             int key = e.getKeyCode();
 
-            if(inGame == State.GAME_OVER || inGame==State.START_SCREEN){
+            if(model.getState() == State.GAME_OVER || model.getState()==State.START_SCREEN){
             	if((key==KeyEvent.VK_SPACE)){
             		initGame();
-            		inGame = State.PLAYING;
+            		model.setState(State.PLAYING);
             	}
             }
-            if ((key == KeyEvent.VK_LEFT) && (snake.getDirection() != Direction.RIGHT)) {
+            if ((key == KeyEvent.VK_LEFT) && (model.getSnake().getDirection() != Direction.RIGHT)) {
                 direction = Direction.LEFT;
             }
 
-            if ((key == KeyEvent.VK_RIGHT) && (snake.getDirection() != Direction.LEFT)) {
+            if ((key == KeyEvent.VK_RIGHT) && (model.getSnake().getDirection() != Direction.LEFT)) {
             	direction = Direction.RIGHT;
             }
 
-            if ((key == KeyEvent.VK_UP) && (snake.getDirection() != Direction.DOWN)) {
+            if ((key == KeyEvent.VK_UP) && (model.getSnake().getDirection() != Direction.DOWN)) {
             	direction = Direction.UP;
             }
 
-            if ((key == KeyEvent.VK_DOWN) && (snake.getDirection() != Direction.UP)) {
+            if ((key == KeyEvent.VK_DOWN) && (model.getSnake().getDirection() != Direction.UP)) {
             	direction = Direction.DOWN;
             }
             
