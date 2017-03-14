@@ -65,7 +65,12 @@ public class Board extends JPanel implements ActionListener {
     private void doDrawing(Graphics g) {
         
         if (inGame) {
-
+        	////
+        	String scores="Score: "+snake.getPoint();
+        	Font small = new Font("Helvetica", Font.BOLD, 14);
+        	g.setColor(Color.white);
+            g.setFont(small);
+        	g.drawString(scores, Constants.WIDTH - 80, Constants.HEIGHT-10);
             g.drawImage(appleImage, apple.getPosition().getX(),
             									apple.getPosition().getY(), this);
 
@@ -85,12 +90,15 @@ public class Board extends JPanel implements ActionListener {
     private void gameOver(Graphics g) {
         
         String msg = "Game Over";
+        String msg2 = "\nScore: "+snake.getPoint();
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr = getFontMetrics(small);
 
         g.setColor(Color.white);
         g.setFont(small);
+       
         g.drawString(msg, (Constants.WIDTH - metr.stringWidth(msg)) / 2, Constants.HEIGHT / 2);
+        g.drawString(msg2, (Constants.WIDTH - metr.stringWidth(msg2)) / 2, (Constants.HEIGHT / 2)+15);
     }
 
     private void checkApple() {
