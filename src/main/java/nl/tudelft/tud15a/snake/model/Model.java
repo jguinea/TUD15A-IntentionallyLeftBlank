@@ -34,8 +34,10 @@ public class Model {
         	inGame = State.GAME_OVER;;
         }
 
-        if (snake.getHead().getY() >= Constants.HEIGHT-this.borderThickness) {
+
+        if (snake.getHead().getY() >= Settings.HEIGHT-this.borderThickness) {
             inGame = State.GAME_OVER;
+
         }
 
         if (snake.getHead().getY() < this.borderThickness) {
@@ -43,8 +45,11 @@ public class Model {
 
         }
 
-        if (snake.getHead().getX() >= Constants.WIDTH-this.borderThickness) {
+
+        if (snake.getHead().getX() >= Settings.WIDTH-this.borderThickness) {
             inGame = State.GAME_OVER;
+
+
         }
 
         if (snake.getHead().getX() < this.borderThickness) {

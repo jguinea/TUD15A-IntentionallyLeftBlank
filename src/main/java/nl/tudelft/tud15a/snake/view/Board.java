@@ -1,5 +1,4 @@
-package nl.tudelft.tud15a.snake.model;
-
+package nl.tudelft.tud15a.snake.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -15,6 +14,12 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import nl.tudelft.tud15a.snake.model.Direction;
+import nl.tudelft.tud15a.snake.model.Model;
+import nl.tudelft.tud15a.snake.model.Position;
+import nl.tudelft.tud15a.snake.model.Settings;
+import nl.tudelft.tud15a.snake.model.State;
 
 public class Board extends JPanel implements ActionListener {
     Model model = new Model();
@@ -34,7 +39,7 @@ public class Board extends JPanel implements ActionListener {
         setBackground(Color.BLUE);
         setFocusable(true);
 
-        setPreferredSize(new Dimension(Constants.WIDTH, Constants.HEIGHT));
+        setPreferredSize(new Dimension(Settings.WIDTH, Settings.HEIGHT));
         loadImages();
         initGame();
     }
@@ -51,7 +56,7 @@ public class Board extends JPanel implements ActionListener {
         model = new Model();
         direction = Direction.RIGHT;
 
-        timer = new Timer(Constants.DELAY, this);
+        timer = new Timer(Settings.DELAY, this);
         timer.start();
     }
 
@@ -74,15 +79,15 @@ public class Board extends JPanel implements ActionListener {
         	Font small = new Font("Helvetica", Font.BOLD, 14);
         	g.setColor(Color.white);
             g.setFont(small);
-        	g.drawString(scores, Constants.WIDTH - 80, Constants.HEIGHT-10);
+        	g.drawString(scores, Settings.WIDTH - 80, Settings.HEIGHT-10);
 
         	//Borders of the Fields
         	borderThickness = ic.getIconHeight();
         	g.setColor(Color.GREEN);
-        	g.drawRect(0,0, Constants.WIDTH, borderThickness);
-        	g.drawRect(0,Constants.HEIGHT-borderThickness, Constants.WIDTH, borderThickness);
-        	g.drawRect(0,0, borderThickness, Constants.HEIGHT);
-        	g.drawRect(Constants.WIDTH-borderThickness,0,borderThickness, Constants.HEIGHT);
+        	g.drawRect(0,0, Settings.WIDTH, borderThickness);
+        	g.drawRect(0,Settings.HEIGHT-borderThickness, Settings.WIDTH, borderThickness);
+        	g.drawRect(0,0, borderThickness, Settings.HEIGHT);
+        	g.drawRect(Settings.WIDTH-borderThickness,0,borderThickness, Settings.HEIGHT);
         	
 
 
@@ -114,9 +119,9 @@ public class Board extends JPanel implements ActionListener {
         g.setColor(Color.white);
         g.setFont(small);
        
-        g.drawString(msg, (Constants.WIDTH - metr.stringWidth(msg)) / 2, (Constants.HEIGHT / 2)-15);
-        g.drawString(msg2, (Constants.WIDTH - metr.stringWidth(msg2)) / 2, (Constants.HEIGHT / 2));
-        g.drawString(msg3, (Constants.WIDTH - metr.stringWidth(msg3)) / 2, (Constants.HEIGHT / 2)+25);
+        g.drawString(msg, (Settings.WIDTH - metr.stringWidth(msg)) / 2, (Settings.HEIGHT / 2)-15);
+        g.drawString(msg2, (Settings.WIDTH - metr.stringWidth(msg2)) / 2, (Settings.HEIGHT / 2));
+        g.drawString(msg3, (Settings.WIDTH - metr.stringWidth(msg3)) / 2, (Settings.HEIGHT / 2)+25);
     }
 
 
@@ -136,8 +141,8 @@ public class Board extends JPanel implements ActionListener {
         g.setColor(Color.white);
         g.setFont(small);
        
-        g.drawString(msg, (Constants.WIDTH - metr.stringWidth(msg)) / 2, (Constants.HEIGHT / 2)-25);
-        g.drawString(msg3, (Constants.WIDTH - metr.stringWidth(msg3)) / 2, (Constants.HEIGHT / 2)+15);
+        g.drawString(msg, (Settings.WIDTH - metr.stringWidth(msg)) / 2, (Settings.HEIGHT / 2)-25);
+        g.drawString(msg3, (Settings.WIDTH - metr.stringWidth(msg3)) / 2, (Settings.HEIGHT / 2)+15);
     }
 
     @Override
@@ -147,6 +152,9 @@ public class Board extends JPanel implements ActionListener {
 
             model.checkApple();
             model.checkCollision();
+            if (model.getState() == State.GAME_OVER) {
+                timer.stop();
+            }
             model.getSnake().move(direction);
         }
 

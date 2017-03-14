@@ -2,9 +2,10 @@ package nl.tudelft.tud15a.snake;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
-import nl.tudelft.tud15a.snake.model.Board;
+import nl.tudelft.tud15a.snake.view.Board;
+
 
 public class Game extends JFrame {
 
@@ -15,19 +16,13 @@ public class Game extends JFrame {
         setResizable(false);
         pack();
         
-        setTitle("Super Snake!");
+        setTitle("Intentionally left blank!");
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
     
 
     public static void main(String[] args) {
-        
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {                
-                JFrame ex = new Game();
-                ex.setVisible(true);                
-            }
-        });
+        EventQueue.invokeLater(() -> new Game().setVisible(true));
     }
 }

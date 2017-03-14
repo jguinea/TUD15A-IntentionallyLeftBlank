@@ -6,12 +6,12 @@ public class Apple {
     private Position position;
 
     private final int CELL_SIZE = 10;
-    private int boardSize = Constants.WIDTH;
+    private int boardSize = Settings.WIDTH;
 
     public Apple() {
     	position = new Position();
     	locate();
-    	boardSize = Constants.WIDTH;
+    	boardSize = Settings.WIDTH;
     	
     	
     }
