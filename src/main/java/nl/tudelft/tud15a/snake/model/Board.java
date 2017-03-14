@@ -1,28 +1,23 @@
 package nl.tudelft.tud15a.snake.model;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.Timer;
-
 public class Board extends JPanel implements ActionListener {
     Snake snake;
     private Apple apple;
 
+    private Color textColor = Color.decode("#800000");
+
     private Direction previousDirection;
     private Direction direction = Direction.RIGHT;
     private boolean inGame = true;
+
+    private int level = 0;
 
     private Timer timer;
     private Image bodyImage;
@@ -67,11 +62,13 @@ public class Board extends JPanel implements ActionListener {
         
         if (inGame) {
         	////
+            String levels = "Level:" + level;
         	String scores="Score: "+snake.getPoint();
         	Font small = new Font("Helvetica", Font.BOLD, 14);
-        	g.setColor(Color.white);
+        	g.setColor(textColor);
             g.setFont(small);
-        	g.drawString(scores, Constants.WIDTH - 80, Constants.HEIGHT-10);
+            g.drawString(levels, Constants.WIDTH - 110, Constants.HEIGHT - 25);
+        	g.drawString(scores, Constants.WIDTH - 110, Constants.HEIGHT-10);
 
         	//Borders of the Fields
         	g.setColor(Color.ORANGE);
@@ -116,7 +113,7 @@ public class Board extends JPanel implements ActionListener {
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr = getFontMetrics(small);
 
-        g.setColor(Color.white);
+        g.setColor(textColor);
         g.setFont(small);
        
         g.drawString(msg, (Constants.WIDTH - metr.stringWidth(msg)) / 2, (Constants.HEIGHT / 2)-15);
