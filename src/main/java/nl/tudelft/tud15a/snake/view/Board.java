@@ -124,6 +124,12 @@ public class Board extends JPanel implements ActionListener {
         g.drawString(msg3, (Settings.WIDTH - metr.stringWidth(msg3)) / 2, (Settings.HEIGHT / 2)+25);
     }
 
+
+   
+    	
+
+        
+
     private void startScreen(Graphics g) {
         
         String msg = "WELCOME TO THE BEST SNAKE";
@@ -131,41 +137,13 @@ public class Board extends JPanel implements ActionListener {
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr = getFontMetrics(small);
 
+
         g.setColor(Color.white);
         g.setFont(small);
        
         g.drawString(msg, (Settings.WIDTH - metr.stringWidth(msg)) / 2, (Settings.HEIGHT / 2)-25);
         g.drawString(msg3, (Settings.WIDTH - metr.stringWidth(msg3)) / 2, (Settings.HEIGHT / 2)+15);
     }
-
-    /*private void checkCollision() {
-    	int bodySize = ic.getIconHeight();
-
-        if(model.getSnake().isEatingYourself()) {
-        	inGame = State.GAME_OVER;
-        }
-
-        if (snake.getHead().getY() >= Constants.HEIGHT-this.borderThickness-bodySize) {
-            inGame = State.GAME_OVER;
-        }
-
-        if (snake.getHead().getY() < this.borderThickness + bodySize) {
-            inGame = State.GAME_OVER;
-        }
-            
-
-        if (snake.getHead().getX() >= Constants.WIDTH-this.borderThickness-bodySize) {
-            inGame = State.GAME_OVER;
-        }
-
-        if (snake.getHead().getX() < this.borderThickness + bodySize) {
-            inGame = State.GAME_OVER;
-        }
-        
-        if(inGame == State.GAME_OVER) {
-            timer.stop();
-        }
-    }*/
 
     @Override
     public void actionPerformed(ActionEvent e) {
