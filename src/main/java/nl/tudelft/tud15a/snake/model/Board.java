@@ -20,7 +20,6 @@ public class Board extends JPanel implements ActionListener {
     Snake snake;
     private Apple apple;
 
-    private Direction previousDirection;
     private Direction direction = Direction.RIGHT;
     private boolean inGame = true;
 
@@ -57,7 +56,6 @@ public class Board extends JPanel implements ActionListener {
         timer = new Timer(Constants.DELAY, this);
         timer.start();
     }
-
 
     @Override
     public void paintComponent(Graphics g) {
@@ -173,7 +171,6 @@ public class Board extends JPanel implements ActionListener {
 
             checkApple();
             checkCollision();
-            previousDirection = direction;
             snake.move(direction);
         }
 
@@ -192,19 +189,19 @@ public class Board extends JPanel implements ActionListener {
             		inGame=true;
             	}
             }
-            if ((key == KeyEvent.VK_LEFT) && (previousDirection != Direction.RIGHT)) {
+            if ((key == KeyEvent.VK_LEFT) && (snake.getDirection() != Direction.RIGHT)) {
                 direction = Direction.LEFT;
             }
 
-            if ((key == KeyEvent.VK_RIGHT) && (previousDirection != Direction.LEFT)) {
+            if ((key == KeyEvent.VK_RIGHT) && (snake.getDirection() != Direction.LEFT)) {
             	direction = Direction.RIGHT;
             }
 
-            if ((key == KeyEvent.VK_UP) && (previousDirection != Direction.DOWN)) {
+            if ((key == KeyEvent.VK_UP) && (snake.getDirection() != Direction.DOWN)) {
             	direction = Direction.UP;
             }
 
-            if ((key == KeyEvent.VK_DOWN) && (previousDirection != Direction.UP)) {
+            if ((key == KeyEvent.VK_DOWN) && (snake.getDirection() != Direction.UP)) {
             	direction = Direction.DOWN;
             }
             
