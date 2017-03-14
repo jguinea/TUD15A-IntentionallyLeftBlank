@@ -4,7 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.*;
 
-import nl.tudelft.tud15a.snake.model.Board;
+import nl.tudelft.tud15a.snake.view.Board;
+
 
 public class Game extends JFrame {
 
