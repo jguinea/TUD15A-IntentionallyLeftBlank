@@ -73,6 +73,15 @@ public class Board extends JPanel implements ActionListener {
         	g.drawRect(Constants.WIDTH,0, 5, Constants.HEIGHT);
         	
 
+        	//Borders of the Fields
+        	g.setColor(Color.GREEN);
+        	g.drawRect(0,0, Constants.WIDTH, 5);
+        	g.drawRect(0,Constants.HEIGHT, Constants.WIDTH, 5);
+        	g.drawRect(0,0, 5, Constants.HEIGHT);
+        	g.drawRect(Constants.WIDTH,0, 5, Constants.HEIGHT);
+        	
+
+
             g.drawImage(appleImage, apple.getPosition().getX(),
             									apple.getPosition().getY(), this);
 
