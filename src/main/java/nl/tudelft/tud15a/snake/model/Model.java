@@ -1,19 +1,24 @@
 package nl.tudelft.tud15a.snake.model;
 
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 public class Model {
     Snake snake;
     private Apple apple;
-    private boolean inGame = true;
+    private State inGame = State.START_SCREEN;
+    private int borderThickness=5;
+    private ImageIcon ic;
 
     public Model() {
 
         snake = new Snake();
         apple = new Apple();
+        ic = new ImageIcon("src/main/java/nl/tudelft/tud15a/snake/view/images/body.jpg");
+        borderThickness = ic.getIconHeight();
     }
 
-    private void checkApple() {
+    public void checkApple() {
 
         if ((snake.getHead().getX() == apple.getPosition().getX()) && (snake.getHead().getY() == apple.getPosition().getY())) {
 
@@ -23,31 +28,44 @@ public class Model {
         }
     }
 
-    private void checkCollision() {
+    public void checkCollision() {
 
         if(snake.isEatingYourself()) {
-        	inGame = false;
+        	inGame = State.GAME_OVER;;
         }
 
-        if (snake.getHead().getY() >= Constants.HEIGHT) {
-            inGame = false;
+        if (snake.getHead().getY() >= Constants.HEIGHT-this.borderThickness) {
+            inGame = State.GAME_OVER;
         }
 
-        if (snake.getHead().getY() < 0) {
-            inGame = false;
+        if (snake.getHead().getY() < this.borderThickness) {
+            inGame = State.GAME_OVER;
+
         }
 
-        if (snake.getHead().getX() >= Constants.WIDTH) {
-            inGame = false;
+        if (snake.getHead().getX() >= Constants.WIDTH-this.borderThickness) {
+            inGame = State.GAME_OVER;;
         }
 
-        if (snake.getHead().getX() < 0) {
-            inGame = false;
+        if (snake.getHead().getX() < this.borderThickness) {
+            inGame = State.GAME_OVER;;
         }
-        
-        if(!inGame) {
-            //timer.stop();
-        }
+
     }
 
+    public State getState() {
+    	return inGame;
+    }
+
+    public void setState(State state) {
+    	inGame = state;
+    }
+
+    public Snake getSnake() {
+    	return snake;
+    }
+
+    public Apple getApple() {
+    	return apple;
+    }
 }
