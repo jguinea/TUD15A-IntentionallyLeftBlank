@@ -119,6 +119,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void checkApple() {
+    	
 
         if ((snake.getHead().getX() == apple.getPosition().getX()) && (snake.getHead().getY() == apple.getPosition().getY())) {
 
@@ -135,19 +136,19 @@ public class Board extends JPanel implements ActionListener {
         	inGame = false;
         }
 
-        if (snake.getHead().getY() >= Constants.HEIGHT-this.borderThickness-bodySize) {
+        if (snake.getHead().getY() >= Constants.HEIGHT-this.borderThickness) {
             inGame = false;
         }
 
-        if (snake.getHead().getY() < this.borderThickness + bodySize) {
+        if (snake.getHead().getY() < this.borderThickness) {
             inGame = false;
         }
 
-        if (snake.getHead().getX() >= Constants.WIDTH-this.borderThickness-bodySize) {
+        if (snake.getHead().getX() >= Constants.WIDTH-this.borderThickness) {
             inGame = false;
         }
 
-        if (snake.getHead().getX() < this.borderThickness + bodySize) {
+        if (snake.getHead().getX() < this.borderThickness) {
             inGame = false;
         }
         
