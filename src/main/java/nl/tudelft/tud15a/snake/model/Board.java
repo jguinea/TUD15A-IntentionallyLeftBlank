@@ -65,14 +65,13 @@ public class Board extends JPanel implements ActionListener {
     private void doDrawing(Graphics g) {
         
         if (inGame) {
-<<<<<<< HEAD
         	////
         	String scores="Score: "+snake.getPoint();
         	Font small = new Font("Helvetica", Font.BOLD, 14);
         	g.setColor(Color.white);
             g.setFont(small);
         	g.drawString(scores, Constants.WIDTH - 80, Constants.HEIGHT-10);
-=======
+
         	//Borders of the Fields
         	g.setColor(Color.ORANGE);
         	g.drawRect(0,0, Constants.WIDTH, 5);
@@ -80,8 +79,6 @@ public class Board extends JPanel implements ActionListener {
         	g.drawRect(0,0, 5, Constants.HEIGHT);
         	g.drawRect(Constants.WIDTH,0, 5, Constants.HEIGHT);
         	
-
->>>>>>> master
             g.drawImage(appleImage, apple.getPosition().getX(),
             									apple.getPosition().getY(), this);
 
