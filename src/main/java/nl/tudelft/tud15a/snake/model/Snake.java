@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Snake {
     public List<Position> position = new ArrayList<Position>(Constants.ALL_CELLS);
+    private Direction direction;
     private int size;
     public Snake() {
     	size = 3;
@@ -31,6 +32,7 @@ public class Snake {
     }
 
     public void move(Direction direction) {
+    	this.direction = direction;
 
         for (int z = size-1; z > 0; z--) {
         	position.get(z).setX(position.get(z-1).getX());
@@ -62,7 +64,12 @@ public class Snake {
     	}
     	return false;
     }
+
     public int getPoint(){
     	return (this.size-3)*10;
+    }
+
+    public Direction getDirection() {
+    	return direction;
     }
 }

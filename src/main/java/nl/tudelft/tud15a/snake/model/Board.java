@@ -20,19 +20,21 @@ public class Board extends JPanel implements ActionListener {
     Snake snake;
     private Apple apple;
 
-    private Direction previousDirection;
-    private Direction direction = Direction.RIGHT;
+    private Direction direction;
     private State inGame = State.START_SCREEN;
+
 
     private Timer timer;
     private Image bodyImage;
     private Image appleImage;
     private Image headImage;
+    private int borderThickness=5;
+    private ImageIcon ic;
 
     public Board() {
 
         addKeyListener(new TAdapter());
-        setBackground(Color.GREEN);
+        setBackground(Color.BLUE);
         setFocusable(true);
 
         setPreferredSize(new Dimension(Constants.WIDTH, Constants.HEIGHT));
@@ -41,6 +43,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void loadImages() {
+    	ic = new ImageIcon("src/main/java/nl/tudelft/tud15a/snake/view/images/body.jpg");
         bodyImage = new ImageIcon("src/main/java/nl/tudelft/tud15a/snake/view/images/body.jpg").getImage();
         headImage = new ImageIcon("src/main/java/nl/tudelft/tud15a/snake/view/images/head.jpg").getImage();
         appleImage = new ImageIcon("src/main/java/nl/tudelft/tud15a/snake/view/images/apple.png").getImage();
@@ -50,11 +53,11 @@ public class Board extends JPanel implements ActionListener {
 
         snake = new Snake();
         apple = new Apple();
+        direction = Direction.RIGHT;
 
         timer = new Timer(Constants.DELAY, this);
         timer.start();
     }
-
 
     @Override
     public void paintComponent(Graphics g) {
@@ -78,20 +81,12 @@ public class Board extends JPanel implements ActionListener {
         	g.drawString(scores, Constants.WIDTH - 80, Constants.HEIGHT-10);
 
         	//Borders of the Fields
-        	g.setColor(Color.ORANGE);
-        	g.drawRect(0,0, Constants.WIDTH, 5);
-        	g.drawRect(0,Constants.HEIGHT, Constants.WIDTH, 5);
-        	g.drawRect(0,0, 5, Constants.HEIGHT);
-        	g.drawRect(Constants.WIDTH,0, 5, Constants.HEIGHT);
-        	
-
-
-        	//Borders of the Fields
+        	borderThickness = ic.getIconHeight();
         	g.setColor(Color.GREEN);
-        	g.drawRect(0,0, Constants.WIDTH, 5);
-        	g.drawRect(0,Constants.HEIGHT, Constants.WIDTH, 5);
-        	g.drawRect(0,0, 5, Constants.HEIGHT);
-        	g.drawRect(Constants.WIDTH,0, 5, Constants.HEIGHT);
+        	g.drawRect(0,0, Constants.WIDTH, borderThickness);
+        	g.drawRect(0,Constants.HEIGHT-borderThickness, Constants.WIDTH, borderThickness);
+        	g.drawRect(0,0, borderThickness, Constants.HEIGHT);
+        	g.drawRect(Constants.WIDTH-borderThickness,0,borderThickness, Constants.HEIGHT);
         	
 
 
@@ -153,24 +148,26 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void checkCollision() {
+    	int bodySize = ic.getIconHeight();
 
         if(snake.isEatingYourself()) {
         	inGame = State.GAME_OVER;
         }
 
-        if (snake.getHead().getY() >= Constants.HEIGHT) {
+        if (snake.getHead().getY() >= Constants.HEIGHT-this.borderThickness-bodySize) {
             inGame = State.GAME_OVER;
         }
 
-        if (snake.getHead().getY() < 0) {
+        if (snake.getHead().getY() < this.borderThickness + bodySize) {
             inGame = State.GAME_OVER;
-            }
+        }
+            
 
-        if (snake.getHead().getX() >= Constants.WIDTH) {
+        if (snake.getHead().getX() >= Constants.WIDTH-this.borderThickness-bodySize) {
             inGame = State.GAME_OVER;
         }
 
-        if (snake.getHead().getX() < 0) {
+        if (snake.getHead().getX() < this.borderThickness + bodySize) {
             inGame = State.GAME_OVER;
         }
         
@@ -186,7 +183,6 @@ public class Board extends JPanel implements ActionListener {
 
             checkApple();
             checkCollision();
-            previousDirection = direction;
             snake.move(direction);
         }
 
@@ -206,19 +202,19 @@ public class Board extends JPanel implements ActionListener {
             		inGame = State.PLAYING;
             	}
             }
-            if ((key == KeyEvent.VK_LEFT) && (previousDirection != Direction.RIGHT)) {
+            if ((key == KeyEvent.VK_LEFT) && (snake.getDirection() != Direction.RIGHT)) {
                 direction = Direction.LEFT;
             }
 
-            if ((key == KeyEvent.VK_RIGHT) && (previousDirection != Direction.LEFT)) {
+            if ((key == KeyEvent.VK_RIGHT) && (snake.getDirection() != Direction.LEFT)) {
             	direction = Direction.RIGHT;
             }
 
-            if ((key == KeyEvent.VK_UP) && (previousDirection != Direction.DOWN)) {
+            if ((key == KeyEvent.VK_UP) && (snake.getDirection() != Direction.DOWN)) {
             	direction = Direction.UP;
             }
 
-            if ((key == KeyEvent.VK_DOWN) && (previousDirection != Direction.UP)) {
+            if ((key == KeyEvent.VK_DOWN) && (snake.getDirection() != Direction.UP)) {
             	direction = Direction.DOWN;
             }
             
