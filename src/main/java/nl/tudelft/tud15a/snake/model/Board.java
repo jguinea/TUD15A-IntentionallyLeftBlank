@@ -22,7 +22,7 @@ public class Board extends JPanel implements ActionListener {
 
     private Direction previousDirection;
     private Direction direction = Direction.RIGHT;
-    private boolean inGame = true;
+    private State inGame = State.START_SCREEN;
 
     private Timer timer;
     private Image bodyImage;
@@ -64,8 +64,12 @@ public class Board extends JPanel implements ActionListener {
     }
     
     private void doDrawing(Graphics g) {
+    	
+    	if(inGame==State.START_SCREEN){
+    		startScreen(g);
+    	}
         
-        if (inGame) {
+    	else if (inGame==State.PLAYING) {
         	////
         	String scores="Score: "+snake.getPoint();
         	Font small = new Font("Helvetica", Font.BOLD, 14);
@@ -109,7 +113,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void gameOver(Graphics g) {
-        
+
         String msg = "Game Over";
         String msg2 = "\nScore: "+snake.getPoint();
         String msg3="Click Spacebar to Restart the Game";
@@ -124,6 +128,20 @@ public class Board extends JPanel implements ActionListener {
         g.drawString(msg3, (Constants.WIDTH - metr.stringWidth(msg3)) / 2, (Constants.HEIGHT / 2)+25);
     }
 
+    private void startScreen(Graphics g) {
+        
+        String msg = "WELCOME TO THE BEST SNAKE";
+        String msg3="Click Spacebar to start your game";
+        Font small = new Font("Helvetica", Font.BOLD, 14);
+        FontMetrics metr = getFontMetrics(small);
+
+        g.setColor(Color.white);
+        g.setFont(small);
+       
+        g.drawString(msg, (Constants.WIDTH - metr.stringWidth(msg)) / 2, (Constants.HEIGHT / 2)-25);
+        g.drawString(msg3, (Constants.WIDTH - metr.stringWidth(msg3)) / 2, (Constants.HEIGHT / 2)+15);
+    }
+    
     private void checkApple() {
 
         if ((snake.getHead().getX() == apple.getPosition().getX()) && (snake.getHead().getY() == apple.getPosition().getY())) {
@@ -137,26 +155,26 @@ public class Board extends JPanel implements ActionListener {
     private void checkCollision() {
 
         if(snake.isEatingYourself()) {
-        	inGame = false;
+        	inGame = State.GAME_OVER;
         }
 
         if (snake.getHead().getY() >= Constants.HEIGHT) {
-            inGame = false;
+            inGame = State.GAME_OVER;
         }
 
         if (snake.getHead().getY() < 0) {
-            inGame = false;
-        }
+            inGame = State.GAME_OVER;
+            }
 
         if (snake.getHead().getX() >= Constants.WIDTH) {
-            inGame = false;
+            inGame = State.GAME_OVER;
         }
 
         if (snake.getHead().getX() < 0) {
-            inGame = false;
+            inGame = State.GAME_OVER;
         }
         
-        if(!inGame) {
+        if(inGame == State.GAME_OVER) {
             timer.stop();
         }
     }
@@ -164,7 +182,7 @@ public class Board extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (inGame) {
+        if (inGame == State.PLAYING) {
 
             checkApple();
             checkCollision();
@@ -181,10 +199,11 @@ public class Board extends JPanel implements ActionListener {
         public void keyPressed(KeyEvent e) {
         	
             int key = e.getKeyCode();
-            if(inGame==false){
+
+            if(inGame == State.GAME_OVER || inGame==State.START_SCREEN){
             	if((key==KeyEvent.VK_SPACE)){
             		initGame();
-            		inGame=true;
+            		inGame = State.PLAYING;
             	}
             }
             if ((key == KeyEvent.VK_LEFT) && (previousDirection != Direction.RIGHT)) {
