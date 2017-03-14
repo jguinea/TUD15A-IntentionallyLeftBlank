@@ -44,11 +44,11 @@ public class Model {
         }
 
         if (snake.getHead().getX() >= Constants.WIDTH-this.borderThickness) {
-            inGame = State.GAME_OVER;;
+            inGame = State.GAME_OVER;
         }
 
         if (snake.getHead().getX() < this.borderThickness) {
-            inGame = State.GAME_OVER;;
+            inGame = State.GAME_OVER;
         }
 
     }
