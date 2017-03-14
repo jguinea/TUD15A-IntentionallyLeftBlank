@@ -33,7 +33,7 @@ public class Board extends JPanel implements ActionListener {
     public Board() {
 
         addKeyListener(new TAdapter());
-        setBackground(Color.GREEN);
+        setBackground(Color.BLUE);
         setFocusable(true);
 
         setPreferredSize(new Dimension(Constants.WIDTH, Constants.HEIGHT));
@@ -73,15 +73,6 @@ public class Board extends JPanel implements ActionListener {
         	g.setColor(Color.white);
             g.setFont(small);
         	g.drawString(scores, Constants.WIDTH - 80, Constants.HEIGHT-10);
-
-        	//Borders of the Fields
-        	g.setColor(Color.ORANGE);
-        	g.drawRect(0,0, Constants.WIDTH, 5);
-        	g.drawRect(0,Constants.HEIGHT, Constants.WIDTH, 5);
-        	g.drawRect(0,0, 5, Constants.HEIGHT);
-        	g.drawRect(Constants.WIDTH,0, 5, Constants.HEIGHT);
-        	
-
 
         	//Borders of the Fields
         	borderThickness = ic.getIconHeight();
@@ -147,7 +138,7 @@ public class Board extends JPanel implements ActionListener {
             inGame = false;
         }
 
-        if (snake.getHead().getY() < this.borderThickness) {
+        if (snake.getHead().getY() < this.borderThickness + bodySize) {
             inGame = false;
         }
 
@@ -155,7 +146,7 @@ public class Board extends JPanel implements ActionListener {
             inGame = false;
         }
 
-        if (snake.getHead().getX() < this.borderThickness) {
+        if (snake.getHead().getX() < this.borderThickness + bodySize) {
             inGame = false;
         }
         
