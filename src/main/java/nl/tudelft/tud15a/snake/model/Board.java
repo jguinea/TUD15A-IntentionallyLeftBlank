@@ -112,14 +112,16 @@ public class Board extends JPanel implements ActionListener {
         
         String msg = "Game Over";
         String msg2 = "\nScore: "+snake.getPoint();
+        String msg3="Click Spacebar to Restart the Game";
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr = getFontMetrics(small);
 
         g.setColor(Color.white);
         g.setFont(small);
        
-        g.drawString(msg, (Constants.WIDTH - metr.stringWidth(msg)) / 2, Constants.HEIGHT / 2);
-        g.drawString(msg2, (Constants.WIDTH - metr.stringWidth(msg2)) / 2, (Constants.HEIGHT / 2)+15);
+        g.drawString(msg, (Constants.WIDTH - metr.stringWidth(msg)) / 2, (Constants.HEIGHT / 2)-15);
+        g.drawString(msg2, (Constants.WIDTH - metr.stringWidth(msg2)) / 2, (Constants.HEIGHT / 2));
+        g.drawString(msg3, (Constants.WIDTH - metr.stringWidth(msg3)) / 2, (Constants.HEIGHT / 2)+25);
     }
 
     private void checkApple() {
@@ -177,9 +179,14 @@ public class Board extends JPanel implements ActionListener {
 
         @Override
         public void keyPressed(KeyEvent e) {
-
+        	
             int key = e.getKeyCode();
-
+            if(inGame==false){
+            	if((key==KeyEvent.VK_SPACE)){
+            		initGame();
+            		inGame=true;
+            	}
+            }
             if ((key == KeyEvent.VK_LEFT) && (previousDirection != Direction.RIGHT)) {
                 direction = Direction.LEFT;
             }
@@ -195,6 +202,7 @@ public class Board extends JPanel implements ActionListener {
             if ((key == KeyEvent.VK_DOWN) && (previousDirection != Direction.UP)) {
             	direction = Direction.DOWN;
             }
+            
         }
     }
 }
