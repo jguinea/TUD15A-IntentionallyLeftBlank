@@ -19,7 +19,7 @@ public class Model {
         if ((snake.getHead().getX() == fruit.getPosition().getX()) && (snake.getHead().getY() == fruit.getPosition().getY())) {
 
             snake.eatApple(fruit);
-            if(Math.random() > 0.3) {
+            if(Math.random() > 0.8) {
             	fruit = new Golden(new Apple());
             } else {
                 fruit = new Apple();
