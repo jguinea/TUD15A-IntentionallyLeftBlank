@@ -3,6 +3,8 @@ package nl.tudelft.tud15a.snake.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import nl.tudelft.tud15a.snake.model.decorator.Apple;
+
 public class Snake {
     public List<Position> position = new ArrayList<>(Settings.ALL_CELLS);
     private Direction direction;

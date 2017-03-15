@@ -1,17 +1,17 @@
-package nl.tudelft.tud15a.snake.model;
+package nl.tudelft.tud15a.snake.model.decorator;
 
-public class Apple {
+import nl.tudelft.tud15a.snake.model.Position;
+import nl.tudelft.tud15a.snake.model.Settings;
+
+public abstract class Fruit {
     private Position position;
-    private int points;
-
     private int boardSize = Settings.WIDTH;
 
-    public Apple() {
-    	points = 10;
+    public Fruit() {
         position = new Position();
         locate();
     }
-
+    
     public Position getPosition() {
         return position;
     }
@@ -25,7 +25,5 @@ public class Apple {
         position.setY(r * Settings.CELL_SIZE);
     }
 
-    public int getPoints() {
-    	return points;
-    }
+    abstract public int getPoints();
 }
