@@ -1,5 +1,7 @@
 package nl.tudelft.tud15a.snake.model;
 
+import nl.tudelft.tud15a.snake.model.decorator.Apple;
+
 public class Model {
     Snake snake;
     private Apple apple;
