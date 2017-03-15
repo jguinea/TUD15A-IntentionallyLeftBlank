@@ -2,10 +2,12 @@ package nl.tudelft.tud15a.snake.model;
 
 public class Apple {
     private Position position;
+    private int points;
 
     private int boardSize = Settings.WIDTH;
 
     public Apple() {
+    	points = 10;
         position = new Position();
         locate();
     }
@@ -21,5 +23,9 @@ public class Apple {
 
         r = 1 + (int) Math.round((Math.random() * (boardSize / Settings.CELL_SIZE - 2)));
         position.setY(r * Settings.CELL_SIZE);
+    }
+
+    public int getPoints() {
+    	return points;
     }
 }
