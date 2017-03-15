@@ -4,72 +4,73 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Snake {
-    public List<Position> position = new ArrayList<Position>(Settings.ALL_CELLS);
+    public List<Position> position = new ArrayList<>(Settings.ALL_CELLS);
     private Direction direction;
     private int size;
+
     public Snake() {
-    	size = 3;
-	    for (int z = 0; z < size; z++) {
-	        position.add(new Position(50 - z * 10, 50));
-	    }
+        size = 3;
+        for (int z = 0; z < size; z++) {
+            position.add(new Position(50 - z * 10, 50));
+        }
     }
 
     public int getSize() {
-    	return size;
+        return size;
     }
 
     public void eatApple() {
-    	size++;
-    	position.add(new Position(0, 0));
+        size++;
+        position.add(new Position(0, 0));
     }
 
     public List<Position> getPosition() {
-    	return position;
+        return position;
     }
 
     public Position getHead() {
-    	return position.get(0);
+        return position.get(0);
     }
 
     public void move(Direction direction) {
-    	this.direction = direction;
+        this.direction = direction;
 
-        for (int z = size-1; z > 0; z--) {
-        	position.get(z).setX(position.get(z-1).getX());
-        	position.get(z).setY(position.get(z-1).getY());
+        for (int z = size - 1; z > 0; z--) {
+            position.get(z).setX(position.get(z - 1).getX());
+            position.get(z).setY(position.get(z - 1).getY());
         }
 
         if (direction == direction.LEFT) {
-        	getHead().setX(getHead().getX() - Settings.CELL_SIZE);
+            getHead().setX(getHead().getX() - Settings.CELL_SIZE);
         }
 
         if (direction == direction.RIGHT) {
-        	getHead().setX(getHead().getX() + Settings.CELL_SIZE);
+            getHead().setX(getHead().getX() + Settings.CELL_SIZE);
         }
 
         if (direction == direction.UP) {
-        	getHead().setY(getHead().getY() - Settings.CELL_SIZE);
+            getHead().setY(getHead().getY() - Settings.CELL_SIZE);
         }
 
         if (direction == direction.DOWN) {
-        	getHead().setY(getHead().getY() + Settings.CELL_SIZE);
+            getHead().setY(getHead().getY() + Settings.CELL_SIZE);
         }
     }
 
     public boolean isEatingYourself() {
-    	for (int z = size-1; z > 0; z--) {
+        for (int z = size - 1; z > 0; z--) {
             if (getHead().getX() == position.get(z).getX() && (getHead().getY() == position.get(z).getY())) {
                 return true;
             }
-    	}
-    	return false;
+        }
+        return false;
     }
 
-    public int getPoint(){
-    	return (this.size-3)*10;
+    public int getPoint() {
+        return (this.size - 3) * 10;
     }
 
     public Direction getDirection() {
-    	return direction;
+        return direction;
     }
 }
