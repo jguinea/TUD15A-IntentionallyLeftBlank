@@ -1,11 +1,17 @@
 package nl.tudelft.tud15a.snake.model.decorator;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+
+import javax.swing.ImageIcon;
+
 import nl.tudelft.tud15a.snake.model.Position;
 import nl.tudelft.tud15a.snake.model.Settings;
 
 public abstract class Fruit {
     private Position position;
     private int boardSize = Settings.WIDTH;
+    protected BufferedImage fruitImage;
 
     public Fruit() {
         position = new Position();
@@ -26,4 +32,13 @@ public abstract class Fruit {
     }
 
     abstract public int getPoints();
+    public BufferedImage getImage(){
+    	return this.fruitImage;
+    }
+    public void setImage(BufferedImage fruitImage){
+    	this.fruitImage = fruitImage;
+    }
+    
+    
+    
 }

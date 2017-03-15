@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nl.tudelft.tud15a.snake.model.decorator.Apple;
+import nl.tudelft.tud15a.snake.model.decorator.Fruit;
 
 public class Snake {
     public List<Position> position = new ArrayList<>(Settings.ALL_CELLS);
@@ -23,7 +24,7 @@ public class Snake {
         return size;
     }
 
-    public void eatApple(Apple apple) {
+    public void eatApple(Fruit apple) {
         size++;
         points += apple.getPoints();
         position.add(new Position(0, 0));

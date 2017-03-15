@@ -1,15 +1,17 @@
 package nl.tudelft.tud15a.snake.model;
 
 import nl.tudelft.tud15a.snake.model.decorator.Apple;
+import nl.tudelft.tud15a.snake.model.decorator.Fruit;
+import nl.tudelft.tud15a.snake.model.decorator.Golden;
 
 public class Model {
     Snake snake;
-    private Apple apple;
+    private Fruit apple;
     private State inGame = State.START_SCREEN;
 
     public Model() {
         snake = new Snake();
-        apple = new Apple();
+        apple = new Golden(new Apple());
     }
 
     public void checkApple() {
@@ -56,7 +58,7 @@ public class Model {
         return snake;
     }
 
-    public Apple getApple() {
+    public Fruit getApple() {
         return apple;
     }
 }
