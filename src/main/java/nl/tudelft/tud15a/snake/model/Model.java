@@ -22,7 +22,7 @@ public class Model {
 
         if ((snake.getHead().getX() == apple.getPosition().getX()) && (snake.getHead().getY() == apple.getPosition().getY())) {
 
-            snake.eatApple();
+            snake.eatApple(apple);
 
             apple.locate();
         }

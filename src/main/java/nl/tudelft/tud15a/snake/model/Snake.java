@@ -7,6 +7,7 @@ public class Snake {
     public List<Position> position = new ArrayList<Position>(Settings.ALL_CELLS);
     private Direction direction;
     private int size;
+    private int points;
     public Snake() {
     	size = 3;
 	    for (int z = 0; z < size; z++) {
@@ -18,8 +19,9 @@ public class Snake {
     	return size;
     }
 
-    public void eatApple() {
+    public void eatApple(Apple apple) {
     	size++;
+    	points += apple.getPoints();
     	position.add(new Position(0, 0));
     }
 
@@ -66,7 +68,7 @@ public class Snake {
     }
 
     public int getPoint(){
-    	return (this.size-3)*10;
+    	return points;
     }
 
     public Direction getDirection() {
