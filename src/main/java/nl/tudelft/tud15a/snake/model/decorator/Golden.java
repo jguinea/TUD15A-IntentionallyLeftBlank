@@ -7,6 +7,7 @@ public class Golden extends Decorator {
 	private float[][] colorMat;
 	public Golden(Fruit fruit) {
 		super(fruit);
+		//green = red + green
 		this.colorMat = new float[][]{ 
 	    		{ 1f,  0f, 0f, 0f }, 
 	    		{ 1f,  1f, 0f, 0f }, 

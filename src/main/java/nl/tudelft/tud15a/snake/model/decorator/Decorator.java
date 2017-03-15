@@ -20,7 +20,7 @@ public abstract class Decorator extends Fruit {
 		this.fruit =fruit;
 		this.setImage(this.fruit.getImage());
 	}
-
+	//apply a filter to change the color of an Image
 	public abstract int getPoints();
 	 public BufferedImage processImage(BufferedImage image, float[][] colorMatrix) {
 		    
@@ -31,6 +31,7 @@ public abstract class Decorator extends Fruit {
 		    return new BufferedImage(image.getColorModel(), displayRaster, true, null);
 
 		  }
+	 
 	public void combine(Fruit fruit, float[][] colorMat){
 		BufferedImage fruitIm = fruit.getImage();
 		BufferedImage newIm = processImage(fruitIm, colorMat);
