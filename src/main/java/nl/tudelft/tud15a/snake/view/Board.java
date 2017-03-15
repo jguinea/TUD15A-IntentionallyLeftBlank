@@ -120,8 +120,8 @@ public class Board extends JPanel implements ActionListener {
         g.drawRect(0, 0, Settings.BORDER_THICKNESS, Settings.HEIGHT);
         g.drawRect(Settings.WIDTH - Settings.BORDER_THICKNESS, 0, Settings.BORDER_THICKNESS, Settings.HEIGHT);
 
-        g.drawImage(appleImage, model.getApple().getPosition().getX(),
-                model.getApple().getPosition().getY(), this);
+        g.drawImage(appleImage, model.getFruit().getPosition().getX(),
+                model.getFruit().getPosition().getY(), this);
 
         for (Position pos : model.getSnake().getPosition()) {
             g.drawImage(bodyImage, pos.getX(), pos.getY(), this);
