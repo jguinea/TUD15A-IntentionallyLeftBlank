@@ -17,11 +17,11 @@ public class Apple {
     }
 
     public void locate() {
-        int r = 1 + (int) (Math.random() * (boardSize / Settings.CELL_SIZE - 2));
+        int r = 1 + (int) (Math.random() * (boardSize / Settings.CELL_SIZE - 3));
         position.setX(r * Settings.CELL_SIZE);
 
 
-        r = 1 + (int) Math.round((Math.random() * (boardSize / Settings.CELL_SIZE - 2)));
+        r = 1 + (int) Math.round((Math.random()* (boardSize / Settings.CELL_SIZE - 3)));
         position.setY(r * Settings.CELL_SIZE);
     }
 
