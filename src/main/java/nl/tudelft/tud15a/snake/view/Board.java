@@ -21,9 +21,11 @@ import nl.tudelft.tud15a.snake.model.Model;
 import nl.tudelft.tud15a.snake.model.Position;
 import nl.tudelft.tud15a.snake.model.Settings;
 import nl.tudelft.tud15a.snake.model.State;
+import nl.tudelft.tud15a.snake.model.observer.CollisionListener;
+import nl.tudelft.tud15a.snake.model.observer.CollisionReason;
 
-public class Board extends JPanel implements ActionListener {
-    private Model model = new Model();
+public class Board extends JPanel implements ActionListener, CollisionListener {
+    private Model model = new Model(this);
 
     private Direction direction;
 
@@ -49,7 +51,7 @@ public class Board extends JPanel implements ActionListener {
     }
 
     private void initGame() {
-        model = new Model();
+        model = new Model(this);
         direction = Direction.RIGHT;
 
         timer = new Timer(Settings.DELAY, this);
@@ -134,16 +136,18 @@ public class Board extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (model.getState() == State.PLAYING) {
-
-            model.checkApple();
-            model.checkCollision();
-            if (model.getState() == State.GAME_OVER) {
-                timer.stop();
-            }
+            model.checkCollisions();
             model.getSnake().move(direction);
         }
 
         repaint();
+    }
+
+    @Override
+    public void onCollision(CollisionReason reason) {
+        if (reason == CollisionReason.GAME_OVER) {
+            timer.stop();
+        }
     }
 
     private class TAdapter extends KeyAdapter {
