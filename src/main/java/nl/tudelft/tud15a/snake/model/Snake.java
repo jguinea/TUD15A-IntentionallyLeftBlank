@@ -3,6 +3,7 @@ package nl.tudelft.tud15a.snake.model;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import nl.tudelft.tud15a.snake.model.decorator.Fruit;
 
 public class Snake {
@@ -23,7 +24,9 @@ public class Snake {
         return size;
     }
 
+
     public void eatApple(Fruit fruit) {
+
         size++;
         points += fruit.getPoints();
         position.add(new Position(0, 0));

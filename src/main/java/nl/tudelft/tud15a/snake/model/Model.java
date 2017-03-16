@@ -6,12 +6,14 @@ import nl.tudelft.tud15a.snake.model.decorator.Golden;
 
 public class Model {
     Snake snake;
+
     private Fruit fruit;
     private State gameState = State.START_SCREEN;
 
     public Model() {
         snake = new Snake();
         fruit = new Apple();
+
     }
 
     public void checkApple() {
@@ -62,7 +64,9 @@ public class Model {
         return snake;
     }
 
+
     public Fruit getFruit() {
         return fruit;
+
     }
 }
