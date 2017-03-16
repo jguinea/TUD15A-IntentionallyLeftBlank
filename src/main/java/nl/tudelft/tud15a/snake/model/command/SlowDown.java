@@ -1,6 +1,6 @@
-package nl.tudelft.tud15a.snake.model.command_pattern;
+package nl.tudelft.tud15a.snake.model.command;
 
-import nl.tudelft.tud15a.snake.SpeedController;
+import nl.tudelft.tud15a.snake.model.SpeedController;
 
 public class SlowDown implements Command {
 	SpeedController speedController;

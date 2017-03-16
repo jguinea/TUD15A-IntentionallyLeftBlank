@@ -1,4 +1,4 @@
-package nl.tudelft.tud15a.snake.model.command_pattern;
+package nl.tudelft.tud15a.snake.model.command;
 
 import nl.tudelft.tud15a.snake.model.Snake;
 

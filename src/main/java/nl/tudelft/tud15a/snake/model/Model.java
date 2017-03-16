@@ -1,14 +1,13 @@
 package nl.tudelft.tud15a.snake.model;
 
-import nl.tudelft.tud15a.snake.SpeedController;
-import nl.tudelft.tud15a.snake.model.command_pattern.GoDown;
-import nl.tudelft.tud15a.snake.model.command_pattern.GoUp;
-import nl.tudelft.tud15a.snake.model.command_pattern.MovementControl;
-import nl.tudelft.tud15a.snake.model.command_pattern.SlowDown;
-import nl.tudelft.tud15a.snake.model.command_pattern.SpeedNoChange;
-import nl.tudelft.tud15a.snake.model.command_pattern.SpeedUp;
-import nl.tudelft.tud15a.snake.model.command_pattern.TurnLeft;
-import nl.tudelft.tud15a.snake.model.command_pattern.TurnRight;
+import nl.tudelft.tud15a.snake.model.command.GoDown;
+import nl.tudelft.tud15a.snake.model.command.GoUp;
+import nl.tudelft.tud15a.snake.model.command.MovementControl;
+import nl.tudelft.tud15a.snake.model.command.SlowDown;
+import nl.tudelft.tud15a.snake.model.command.SpeedNoChange;
+import nl.tudelft.tud15a.snake.model.command.SpeedUp;
+import nl.tudelft.tud15a.snake.model.command.TurnLeft;
+import nl.tudelft.tud15a.snake.model.command.TurnRight;
 import nl.tudelft.tud15a.snake.model.decorator.Apple;
 import nl.tudelft.tud15a.snake.model.decorator.Fruit;
 import nl.tudelft.tud15a.snake.model.observer.CollisionListener;
