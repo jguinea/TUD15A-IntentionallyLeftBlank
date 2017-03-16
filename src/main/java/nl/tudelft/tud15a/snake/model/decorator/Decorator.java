@@ -11,17 +11,30 @@ import java.awt.image.WritableRaster;
 
 
 import nl.tudelft.tud15a.snake.model.Position;
+import nl.tudelft.tud15a.snake.model.Settings;
 
-public abstract class Decorator extends Fruit {
+public abstract class Decorator implements Fruit {
 	protected Fruit fruit;
 	protected Color color;
 
 	Decorator(Fruit fruit) {
 		this.fruit =fruit;
-		this.setImage(this.fruit.getImage());
 	}
-	//apply a filter to change the color of an Image
+
+	
+
+
+    public Position getPosition() {
+        return fruit.getPosition();
+    }
+
+    public void locate() {
+        fruit.locate();
+    }
+
+
 	public abstract int getPoints();
+	
 	 public BufferedImage processImage(BufferedImage image, float[][] colorMatrix) {
 		    
 		    BandCombineOp changeColors = new BandCombineOp(colorMatrix, null);
@@ -31,10 +44,16 @@ public abstract class Decorator extends Fruit {
 		    return new BufferedImage(image.getColorModel(), displayRaster, true, null);
 
 		  }
-	 
+	//apply a filter to change the color of an Image
 	public void combine(Fruit fruit, float[][] colorMat){
 		BufferedImage fruitIm = fruit.getImage();
 		BufferedImage newIm = processImage(fruitIm, colorMat);
 		this.setImage(newIm);
+	}
+	public BufferedImage getImage(){
+		return fruit.getImage();
+	}
+	public void setImage(BufferedImage fruitImage){
+		this.fruit.setImage(fruitImage);
 	}
 }

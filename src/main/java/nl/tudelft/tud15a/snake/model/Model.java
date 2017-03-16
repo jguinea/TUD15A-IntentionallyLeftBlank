@@ -6,59 +6,67 @@ import nl.tudelft.tud15a.snake.model.decorator.Golden;
 
 public class Model {
     Snake snake;
-    private Fruit apple;
-    private State inGame = State.START_SCREEN;
+
+    private Fruit fruit;
+    private State gameState = State.START_SCREEN;
 
     public Model() {
         snake = new Snake();
-        apple = new Golden(new Apple());
+        fruit = new Apple();
+
     }
 
     public void checkApple() {
 
-        if ((snake.getHead().getX() == apple.getPosition().getX()) && (snake.getHead().getY() == apple.getPosition().getY())) {
+        if ((snake.getHead().getX() == fruit.getPosition().getX()) && (snake.getHead().getY() == fruit.getPosition().getY())) {
 
-            snake.eatApple(apple);
-
-            apple.locate();
+            snake.eatApple(fruit);
+            if(Math.random() > 0.8) {
+            	fruit = new Golden(new Apple());
+            } else {
+                fruit = new Apple();
+            }
+            fruit.locate();
         }
     }
 
     public void checkCollision() {
         if (snake.isEatingYourself()) {
-            inGame = State.GAME_OVER;
+        	gameState = State.GAME_OVER;
         }
 
         if (snake.getHead().getY() >= Settings.HEIGHT - Settings.BORDER_THICKNESS) {
-            inGame = State.GAME_OVER;
+        	gameState = State.GAME_OVER;
         }
 
         if (snake.getHead().getY() < Settings.BORDER_THICKNESS) {
-            inGame = State.GAME_OVER;
+        	gameState = State.GAME_OVER;
         }
 
         if (snake.getHead().getX() >= Settings.WIDTH - Settings.BORDER_THICKNESS) {
-            inGame = State.GAME_OVER;
+        	gameState = State.GAME_OVER;
         }
 
         if (snake.getHead().getX() < Settings.BORDER_THICKNESS) {
-            inGame = State.GAME_OVER;
+        	gameState = State.GAME_OVER;
         }
     }
 
     public State getState() {
-        return inGame;
+        return gameState;
     }
 
     public void setState(State state) {
-        inGame = state;
+    	gameState = state;
     }
 
     public Snake getSnake() {
         return snake;
     }
 
-    public Fruit getApple() {
-        return apple;
+
+    public Fruit getFruit() {
+        return fruit;
+
     }
 }
