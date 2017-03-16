@@ -1,5 +1,7 @@
 package nl.tudelft.tud15a.snake.model.command;
 
+import nl.tudelft.tud15a.snake.model.command.commands.NoCommand;
+
 public class MovementControl {
 	Command snakeCommands[];
 	Command noCommand = new NoCommand();

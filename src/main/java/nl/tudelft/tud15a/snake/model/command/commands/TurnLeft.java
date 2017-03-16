@@ -1,6 +1,7 @@
-package nl.tudelft.tud15a.snake.model.command;
+package nl.tudelft.tud15a.snake.model.command.commands;
 
 import nl.tudelft.tud15a.snake.model.Snake;
+import nl.tudelft.tud15a.snake.model.command.Command;
 
 public class TurnLeft implements Command {
 	Snake snake;

@@ -1,13 +1,13 @@
 package nl.tudelft.tud15a.snake.model;
 
-import nl.tudelft.tud15a.snake.model.command.GoDown;
-import nl.tudelft.tud15a.snake.model.command.GoUp;
 import nl.tudelft.tud15a.snake.model.command.MovementControl;
-import nl.tudelft.tud15a.snake.model.command.SlowDown;
-import nl.tudelft.tud15a.snake.model.command.SpeedNoChange;
-import nl.tudelft.tud15a.snake.model.command.SpeedUp;
-import nl.tudelft.tud15a.snake.model.command.TurnLeft;
-import nl.tudelft.tud15a.snake.model.command.TurnRight;
+import nl.tudelft.tud15a.snake.model.command.commands.GoDown;
+import nl.tudelft.tud15a.snake.model.command.commands.GoUp;
+import nl.tudelft.tud15a.snake.model.command.commands.SlowDown;
+import nl.tudelft.tud15a.snake.model.command.commands.SpeedNoChange;
+import nl.tudelft.tud15a.snake.model.command.commands.SpeedUp;
+import nl.tudelft.tud15a.snake.model.command.commands.TurnLeft;
+import nl.tudelft.tud15a.snake.model.command.commands.TurnRight;
 import nl.tudelft.tud15a.snake.model.decorator.Apple;
 import nl.tudelft.tud15a.snake.model.decorator.Fruit;
 
