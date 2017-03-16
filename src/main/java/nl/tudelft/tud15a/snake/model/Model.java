@@ -1,6 +1,5 @@
 package nl.tudelft.tud15a.snake.model;
 
-import nl.tudelft.tud15a.snake.SpeedController;
 import nl.tudelft.tud15a.snake.model.command_pattern.GoDown;
 import nl.tudelft.tud15a.snake.model.command_pattern.GoUp;
 import nl.tudelft.tud15a.snake.model.command_pattern.MovementControl;

@@ -1,4 +1,4 @@
-package nl.tudelft.tud15a.snake;
+package nl.tudelft.tud15a.snake.model;
 
 public class SpeedController {
 	private int speed = 150;
