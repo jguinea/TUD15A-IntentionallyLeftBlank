@@ -13,11 +13,9 @@ public class Snake implements CollisionListener {
     private int points;
     private int size;
     private Model model;
-    private int speed;
 
     public Snake(Model model) {
         this.model = model;
-    	speed = 130;
     	points = 0;
         size = 3;
         for (int z = 0; z < size; z++) {
@@ -90,13 +88,5 @@ public class Snake implements CollisionListener {
 
     public int getPoint() {
         return points;
-    }
-
-    public int getSpeed() {
-    	return this.speed;
-    }
-
-    public void setSpeed(int speed) {
-    	this.speed = speed;
     }
 }

@@ -1,5 +1,6 @@
 package nl.tudelft.tud15a.snake.model;
 
+import nl.tudelft.tud15a.snake.SpeedController;
 import nl.tudelft.tud15a.snake.model.command_pattern.GoDown;
 import nl.tudelft.tud15a.snake.model.command_pattern.GoUp;
 import nl.tudelft.tud15a.snake.model.command_pattern.MovementControl;
@@ -15,22 +16,26 @@ import nl.tudelft.tud15a.snake.model.observer.CollisionObservable;
 import nl.tudelft.tud15a.snake.model.observer.CollisionReason;
 
 public class Model extends CollisionObservable {
-	MovementControl movementControl;
-    Snake snake;
+	private MovementControl movementControl;
+    private Snake snake;
     private Fruit fruit;
+    private SpeedController speedController;
+    
     private State gameState = State.START_SCREEN;
 
     public Model(CollisionListener timerListener) {
     	movementControl = new MovementControl(7);
         snake = new Snake(this);
         fruit = new Apple();
+        speedController = new SpeedController();
+        
         movementControl.setCommand(Direction.valueOf("LEFT").getIndex(), new TurnLeft(snake));
         movementControl.setCommand(Direction.valueOf("RIGHT").getIndex(), new TurnRight(snake));
         movementControl.setCommand(Direction.valueOf("UP").getIndex(), new GoUp(snake));
     	movementControl.setCommand(Direction.valueOf("DOWN").getIndex(), new GoDown(snake));
-    	movementControl.setCommand(Speed.valueOf("SPEEDUP").getIndex(), new SpeedUp(snake));
-    	movementControl.setCommand(Speed.valueOf("SLOWDOWN").getIndex(), new SlowDown(snake));
-    	movementControl.setCommand(Speed.valueOf("NOCHANGE").getIndex(), new SpeedNoChange(snake));
+    	movementControl.setCommand(Speed.valueOf("SPEEDUP").getIndex(), new SpeedUp(speedController));
+    	movementControl.setCommand(Speed.valueOf("SLOWDOWN").getIndex(), new SlowDown(speedController));
+    	movementControl.setCommand(Speed.valueOf("NOCHANGE").getIndex(), new SpeedNoChange(speedController));
 
         this.addListener(snake);
         this.addListener(new FruitRNG(this));
@@ -82,5 +87,9 @@ public class Model extends CollisionObservable {
 
     public MovementControl getMovementControl() {
     	return movementControl;
+    }
+
+    public SpeedController getSpeedController() {
+    	return speedController;
     }
 }

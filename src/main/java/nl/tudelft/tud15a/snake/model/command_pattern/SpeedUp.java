@@ -1,15 +1,16 @@
 package nl.tudelft.tud15a.snake.model.command_pattern;
 
+import nl.tudelft.tud15a.snake.SpeedController;
 import nl.tudelft.tud15a.snake.model.Snake;
 
 public class SpeedUp implements Command {
-	Snake snake;
+	SpeedController speedController;
 
-	public SpeedUp(Snake snake) {
-		this.snake = snake;
+	public SpeedUp(SpeedController speedController) {
+		this.speedController = speedController;
 	}
 
 	public void execute() {
-		snake.setSpeed(snake.getSpeed() + 30);
+		speedController.setSpeed(speedController.getSpeed() - 30);
 	}
 }

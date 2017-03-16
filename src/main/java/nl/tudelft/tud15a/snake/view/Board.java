@@ -56,7 +56,7 @@ public class Board extends JPanel implements ActionListener, CollisionListener {
         direction = Direction.RIGHT;
         prevDirection = Direction.RIGHT;
         speed = Speed.NOCHANGE;
-        timer = new Timer(model.getSnake().getSpeed(), this);
+        timer = new Timer(model.getSpeedController().getSpeed(), this);
         timer.start();
     }
 
@@ -139,7 +139,7 @@ public class Board extends JPanel implements ActionListener, CollisionListener {
     public void actionPerformed(ActionEvent e) {
         if (model.getState() == State.PLAYING) {
             model.checkCollision();
-            timer.setDelay(model.getSnake().getSpeed());
+            timer.setDelay(model.getSpeedController().getSpeed());
 
             if (model.getState() == State.GAME_OVER) {
                 timer.stop();
