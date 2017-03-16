@@ -16,6 +16,8 @@ public class Warp extends Decorator {
 		int y = 3 +random.nextInt(Settings.HEIGHT/Settings.CELL_SIZE - 5);
 		Position newPos = new Position(x*Settings.CELL_SIZE,y*Settings.CELL_SIZE);
 		snake.setPosition(newPos);
+		combineBlur(fruit);
+		
 		
 	}
 
