@@ -31,10 +31,10 @@ public class Apple implements Fruit {
 	}
 
 	public void locate() {
-		int r = 1 + (int) (Math.random() * (boardSize / Settings.CELL_SIZE - 3));
+		int r = 1 + (int) (Math.random() * (Settings.WIDTH / Settings.CELL_SIZE - 3));
 		position.setX(r * Settings.CELL_SIZE);
 
-		r = 1 + (int) Math.round((Math.random() * (boardSize / Settings.CELL_SIZE - 3)));
+		r = 1 + (int) Math.round((Math.random() * (Settings.HEIGHT / Settings.CELL_SIZE - 3)));
 		position.setY(r * Settings.CELL_SIZE);
 
 	}
@@ -55,4 +55,7 @@ public class Apple implements Fruit {
 		// TODO Auto-generated method stub
 		return fruitImage;
 	};
+	public void setSnakePoint(int snakePoint){
+		
+	}
 }

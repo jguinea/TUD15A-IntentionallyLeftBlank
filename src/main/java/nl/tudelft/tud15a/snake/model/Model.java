@@ -3,6 +3,8 @@ package nl.tudelft.tud15a.snake.model;
 import nl.tudelft.tud15a.snake.model.decorator.Apple;
 import nl.tudelft.tud15a.snake.model.decorator.Fruit;
 import nl.tudelft.tud15a.snake.model.decorator.Golden;
+import nl.tudelft.tud15a.snake.model.decorator.Silver;
+import nl.tudelft.tud15a.snake.model.decorator.Warp;
 
 public class Model {
     Snake snake;
@@ -21,8 +23,8 @@ public class Model {
         if ((snake.getHead().getX() == fruit.getPosition().getX()) && (snake.getHead().getY() == fruit.getPosition().getY())) {
 
             snake.eatApple(fruit);
-            if(Math.random() > 0.8) {
-            	fruit = new Golden(new Apple());
+            if(Math.random() > 0) {
+            	fruit = new Warp(new Apple(), snake);
             } else {
                 fruit = new Apple();
             }

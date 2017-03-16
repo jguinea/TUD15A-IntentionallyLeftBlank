@@ -3,13 +3,13 @@ package nl.tudelft.tud15a.snake.model.decorator;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
-public class Golden extends Decorator {
+public class Golden extends Metal {
 	private int pointsMultiplier;
-	private float[][] colorMat;
-	public Golden(Fruit fruit) {
-		super(fruit);
-		//green = red + green
-		this.colorMat = new float[][]{ 
+	
+	public Golden(Fruit fruit, int snakePoint) {
+		super(fruit, snakePoint);
+		//yellow = red + green
+		super.colorMat = new float[][]{ 
 	    		{ 1f,  0f, 0f, 0f }, 
 	    		{ 1f,  1f, 0f, 0f }, 
 	    		{ 0f,  0f, 1f, 0f},
@@ -20,7 +20,7 @@ public class Golden extends Decorator {
 	}
 
 	public int getPoints() {
-		return fruit.getPoints() * pointsMultiplier;
+		return pointsMultiplier * super.snakePoint;
 	}
 
 	@Override

@@ -12,10 +12,11 @@ import java.awt.image.WritableRaster;
 
 import nl.tudelft.tud15a.snake.model.Position;
 import nl.tudelft.tud15a.snake.model.Settings;
+import nl.tudelft.tud15a.snake.model.Snake;
 
 public abstract class Decorator implements Fruit {
 	protected Fruit fruit;
-	protected Color color;
+	protected float[][] colorMat;
 
 	Decorator(Fruit fruit) {
 		this.fruit =fruit;
@@ -56,4 +57,5 @@ public abstract class Decorator implements Fruit {
 	public void setImage(BufferedImage fruitImage){
 		this.fruit.setImage(fruitImage);
 	}
+	
 }

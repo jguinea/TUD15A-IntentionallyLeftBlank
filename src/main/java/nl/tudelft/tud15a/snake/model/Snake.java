@@ -39,6 +39,9 @@ public class Snake {
     public Position getHead() {
         return position.get(0);
     }
+    public void setPosition(Position pos){
+    	position.set(0, pos);
+    }
 
     public void move(Direction direction) {
         this.direction = direction;
