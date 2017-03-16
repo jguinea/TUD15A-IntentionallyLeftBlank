@@ -31,7 +31,6 @@ public class Board extends JPanel implements ActionListener, CollisionListener {
 
     private Timer timer;
     private Image bodyImage;
-    private Image appleImage;
     private Image headImage;
 
     public Board() {
@@ -47,7 +46,6 @@ public class Board extends JPanel implements ActionListener, CollisionListener {
     private void loadImages() {
         bodyImage = new ImageIcon("src/main/java/nl/tudelft/tud15a/snake/view/images/body.jpg").getImage();
         headImage = new ImageIcon("src/main/java/nl/tudelft/tud15a/snake/view/images/head.jpg").getImage();
-        appleImage = new ImageIcon("src/main/java/nl/tudelft/tud15a/snake/view/images/apple.png").getImage();
     }
 
     private void initGame() {
@@ -122,8 +120,12 @@ public class Board extends JPanel implements ActionListener, CollisionListener {
         g.drawRect(0, 0, Settings.BORDER_THICKNESS, Settings.HEIGHT);
         g.drawRect(Settings.WIDTH - Settings.BORDER_THICKNESS, 0, Settings.BORDER_THICKNESS, Settings.HEIGHT);
 
-        g.drawImage(appleImage, model.getFruit().getPosition().getX(),
+
+        g.drawImage(model.getFruit().getImage(), model.getFruit().getPosition().getX(),
                 model.getFruit().getPosition().getY(), this);
+        
+
+
 
         for (Position pos : model.getSnake().getPosition()) {
             g.drawImage(bodyImage, pos.getX(), pos.getY(), this);

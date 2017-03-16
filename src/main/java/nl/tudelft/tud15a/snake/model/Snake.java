@@ -3,6 +3,7 @@ package nl.tudelft.tud15a.snake.model;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import nl.tudelft.tud15a.snake.model.decorator.Fruit;
 import nl.tudelft.tud15a.snake.model.observer.CollisionListener;
 import nl.tudelft.tud15a.snake.model.observer.CollisionReason;
@@ -27,7 +28,9 @@ public class Snake implements CollisionListener {
         return size;
     }
 
+
     public void eatApple(Fruit fruit) {
+
         size++;
         points += fruit.getPoints();
         position.add(new Position(0, 0));
