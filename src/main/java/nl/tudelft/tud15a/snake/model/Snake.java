@@ -3,15 +3,20 @@ package nl.tudelft.tud15a.snake.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import nl.tudelft.tud15a.snake.model.decorator.Fruit;
 
-public class Snake {
+import nl.tudelft.tud15a.snake.model.decorator.Fruit;
+import nl.tudelft.tud15a.snake.model.observer.CollisionListener;
+import nl.tudelft.tud15a.snake.model.observer.CollisionReason;
+
+public class Snake implements CollisionListener {
     public List<Position> position = new ArrayList<>(Settings.ALL_CELLS);
     private int points;
     private int size;
+    private Model model;
     private int speed;
 
-    public Snake() {
+    public Snake(Model model) {
+        this.model = model;
     	speed = 130;
     	points = 0;
         size = 3;
@@ -24,7 +29,9 @@ public class Snake {
         return size;
     }
 
+
     public void eatApple(Fruit fruit) {
+
         size++;
         points += fruit.getPoints();
         position.add(new Position(0, 0));
@@ -72,6 +79,13 @@ public class Snake {
             }
         }
         return false;
+    }
+
+    @Override
+    public void onCollision(CollisionReason reason) {
+        if(reason == CollisionReason.EAT_FRUIT) {
+            eatApple(model.getFruit());
+        }
     }
 
     public int getPoint() {

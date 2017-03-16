@@ -10,17 +10,19 @@ import nl.tudelft.tud15a.snake.model.command_pattern.TurnLeft;
 import nl.tudelft.tud15a.snake.model.command_pattern.TurnRight;
 import nl.tudelft.tud15a.snake.model.decorator.Apple;
 import nl.tudelft.tud15a.snake.model.decorator.Fruit;
-import nl.tudelft.tud15a.snake.model.decorator.Golden;
+import nl.tudelft.tud15a.snake.model.observer.CollisionListener;
+import nl.tudelft.tud15a.snake.model.observer.CollisionObservable;
+import nl.tudelft.tud15a.snake.model.observer.CollisionReason;
 
-public class Model {
+public class Model extends CollisionObservable {
 	MovementControl movementControl;
     Snake snake;
     private Fruit fruit;
     private State gameState = State.START_SCREEN;
 
-    public Model() {
+    public Model(CollisionListener timerListener) {
     	movementControl = new MovementControl(7);
-        snake = new Snake();
+        snake = new Snake(this);
         fruit = new Apple();
         movementControl.setCommand(Direction.valueOf("LEFT").getIndex(), new TurnLeft(snake));
         movementControl.setCommand(Direction.valueOf("RIGHT").getIndex(), new TurnRight(snake));
@@ -29,41 +31,32 @@ public class Model {
     	movementControl.setCommand(Speed.valueOf("SPEEDUP").getIndex(), new SpeedUp(snake));
     	movementControl.setCommand(Speed.valueOf("SLOWDOWN").getIndex(), new SlowDown(snake));
     	movementControl.setCommand(Speed.valueOf("NOCHANGE").getIndex(), new SpeedNoChange(snake));
-    }
 
-    public void checkApple() {
+        this.addListener(snake);
+        this.addListener(new FruitRNG(this));
+        this.addListener(timerListener);
 
-        if ((snake.getHead().getX() == fruit.getPosition().getX()) && (snake.getHead().getY() == fruit.getPosition().getY())) {
-
-            snake.eatApple(fruit);
-            if(Math.random() > 0.8) {
-            	fruit = new Golden(new Apple());
-            } else {
-                fruit = new Apple();
-            }
-            fruit.locate();
-        }
     }
 
     public void checkCollision() {
-        if (snake.isEatingYourself()) {
-        	gameState = State.GAME_OVER;
-        }
+        checkApple();
+        checkGameOver();
+    }
 
-        if (snake.getHead().getY() >= Settings.HEIGHT - Settings.BORDER_THICKNESS) {
-        	gameState = State.GAME_OVER;
+    private void checkApple() {
+        if ((snake.getHead().getX() == fruit.getPosition().getX()) && (snake.getHead().getY() == fruit.getPosition().getY())) {
+            collision(CollisionReason.EAT_FRUIT);
         }
+    }
 
-        if (snake.getHead().getY() < Settings.BORDER_THICKNESS) {
-        	gameState = State.GAME_OVER;
-        }
-
-        if (snake.getHead().getX() >= Settings.WIDTH - Settings.BORDER_THICKNESS) {
-        	gameState = State.GAME_OVER;
-        }
-
-        if (snake.getHead().getX() < Settings.BORDER_THICKNESS) {
-        	gameState = State.GAME_OVER;
+    private void checkGameOver() {
+        if (snake.isEatingYourself()
+                || snake.getHead().getY() >= Settings.HEIGHT - Settings.BORDER_THICKNESS
+                || snake.getHead().getY() < Settings.BORDER_THICKNESS
+                || snake.getHead().getX() >= Settings.WIDTH - Settings.BORDER_THICKNESS
+                || snake.getHead().getX() < Settings.BORDER_THICKNESS) {
+            gameState = State.GAME_OVER;
+            collision(CollisionReason.GAME_OVER);
         }
     }
 
@@ -72,7 +65,7 @@ public class Model {
     }
 
     public void setState(State state) {
-    	gameState = state;
+        gameState = state;
     }
 
     public Snake getSnake() {
@@ -81,6 +74,10 @@ public class Model {
 
     public Fruit getFruit() {
         return fruit;
+    }
+
+    public void setFruit(Fruit fruit) {
+        this.fruit = fruit;
     }
 
     public MovementControl getMovementControl() {
