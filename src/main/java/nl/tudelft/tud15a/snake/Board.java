@@ -1,26 +1,17 @@
 package nl.tudelft.tud15a.snake.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.Timer;
-
 import nl.tudelft.tud15a.snake.model.Direction;
 import nl.tudelft.tud15a.snake.model.Model;
 import nl.tudelft.tud15a.snake.model.Position;
 import nl.tudelft.tud15a.snake.model.Settings;
 import nl.tudelft.tud15a.snake.model.State;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Board extends JPanel implements ActionListener {
     private Model model = new Model();
@@ -31,7 +22,6 @@ public class Board extends JPanel implements ActionListener {
     private Image bodyImage;
     private Image appleImage;
     private Image headImage;
-
     public Board() {
         addKeyListener(new TAdapter());
         setBackground(Color.BLUE);
@@ -40,6 +30,14 @@ public class Board extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(Settings.WIDTH, Settings.HEIGHT));
         loadImages();
         initGame();
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 
     private void loadImages() {
