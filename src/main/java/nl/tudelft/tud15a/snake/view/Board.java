@@ -20,12 +20,15 @@ import nl.tudelft.tud15a.snake.model.Direction;
 import nl.tudelft.tud15a.snake.model.Model;
 import nl.tudelft.tud15a.snake.model.Position;
 import nl.tudelft.tud15a.snake.model.Settings;
+import nl.tudelft.tud15a.snake.model.Speed;
 import nl.tudelft.tud15a.snake.model.State;
 
 public class Board extends JPanel implements ActionListener {
     private Model model = new Model();
 
     private Direction direction;
+    private Direction prevDirection;
+    private Speed speed;
 
     private Timer timer;
     private Image bodyImage;
@@ -51,8 +54,9 @@ public class Board extends JPanel implements ActionListener {
     private void initGame() {
         model = new Model();
         direction = Direction.RIGHT;
-
-        timer = new Timer(Settings.DELAY, this);
+        prevDirection = Direction.RIGHT;
+        speed = Speed.NOCHANGE;
+        timer = new Timer(model.getSnake().getSpeed(), this);
         timer.start();
     }
 
@@ -137,10 +141,15 @@ public class Board extends JPanel implements ActionListener {
 
             model.checkApple();
             model.checkCollision();
+            timer.setDelay(model.getSnake().getSpeed());
+
             if (model.getState() == State.GAME_OVER) {
                 timer.stop();
             }
-            model.getSnake().move(direction);
+            model.getMovementControl().pressOnButton(direction.getIndex());
+            model.getMovementControl().pressOnButton(speed.getIndex());
+            prevDirection = direction;
+            speed = Speed.NOCHANGE;
         }
 
         repaint();
@@ -158,20 +167,28 @@ public class Board extends JPanel implements ActionListener {
                     model.setState(State.PLAYING);
                 }
             }
-            if ((key == KeyEvent.VK_LEFT) && (model.getSnake().getDirection() != Direction.RIGHT)) {
+            if ((key == KeyEvent.VK_LEFT) && (prevDirection != Direction.RIGHT)) {
                 direction = Direction.LEFT;
             }
 
-            if ((key == KeyEvent.VK_RIGHT) && (model.getSnake().getDirection() != Direction.LEFT)) {
+            if ((key == KeyEvent.VK_RIGHT) && (prevDirection != Direction.LEFT)) {
                 direction = Direction.RIGHT;
             }
 
-            if ((key == KeyEvent.VK_UP) && (model.getSnake().getDirection() != Direction.DOWN)) {
+            if ((key == KeyEvent.VK_UP) && (prevDirection != Direction.DOWN)) {
                 direction = Direction.UP;
             }
 
-            if ((key == KeyEvent.VK_DOWN) && (model.getSnake().getDirection() != Direction.UP)) {
+            if ((key == KeyEvent.VK_DOWN) && (prevDirection != Direction.UP)) {
                 direction = Direction.DOWN;
+            }
+
+            if (key == KeyEvent.VK_W) {
+            	speed = Speed.SPEEDUP;
+            }
+
+            if (key == KeyEvent.VK_S) {
+            	speed = Speed.SLOWDOWN;
             }
 
         }

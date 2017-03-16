@@ -7,11 +7,12 @@ import nl.tudelft.tud15a.snake.model.decorator.Fruit;
 
 public class Snake {
     public List<Position> position = new ArrayList<>(Settings.ALL_CELLS);
-    private Direction direction;
     private int points;
     private int size;
+    private int speed;
 
     public Snake() {
+    	speed = 130;
     	points = 0;
         size = 3;
         for (int z = 0; z < size; z++) {
@@ -37,29 +38,31 @@ public class Snake {
         return position.get(0);
     }
 
-    public void move(Direction direction) {
-        this.direction = direction;
-
+    private void moveBody() {
         for (int z = size - 1; z > 0; z--) {
             position.get(z).setX(position.get(z - 1).getX());
             position.get(z).setY(position.get(z - 1).getY());
         }
+    }
 
-        if (direction == direction.LEFT) {
-            getHead().setX(getHead().getX() - Settings.CELL_SIZE);
-        }
+    public void moveLeft() {
+    	moveBody();
+    	getHead().setX(getHead().getX() - Settings.CELL_SIZE);
+    }
 
-        if (direction == direction.RIGHT) {
-            getHead().setX(getHead().getX() + Settings.CELL_SIZE);
-        }
+    public void moveRight() {
+    	moveBody();
+    	getHead().setX(getHead().getX() + Settings.CELL_SIZE);
+    }
 
-        if (direction == direction.UP) {
-            getHead().setY(getHead().getY() - Settings.CELL_SIZE);
-        }
+    public void moveUp() {
+    	moveBody();
+    	getHead().setY(getHead().getY() - Settings.CELL_SIZE);
+    }
 
-        if (direction == direction.DOWN) {
-            getHead().setY(getHead().getY() + Settings.CELL_SIZE);
-        }
+    public void moveDown() {
+    	moveBody();
+    	getHead().setY(getHead().getY() + Settings.CELL_SIZE);
     }
 
     public boolean isEatingYourself() {
@@ -75,7 +78,11 @@ public class Snake {
         return points;
     }
 
-    public Direction getDirection() {
-        return direction;
+    public int getSpeed() {
+    	return this.speed;
+    }
+
+    public void setSpeed(int speed) {
+    	this.speed = speed;
     }
 }
