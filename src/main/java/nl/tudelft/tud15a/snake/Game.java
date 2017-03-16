@@ -1,10 +1,7 @@
 package nl.tudelft.tud15a.snake;
 
-import java.awt.EventQueue;
-
 import javax.swing.*;
-
-import nl.tudelft.tud15a.snake.view.Board;
+import java.awt.*;
 
 
 public class Game extends JFrame {
