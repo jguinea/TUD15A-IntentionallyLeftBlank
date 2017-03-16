@@ -1,4 +1,4 @@
-package nl.tudelft.tud15a.snake.model.command_pattern;
+package nl.tudelft.tud15a.snake.model.command;
 
 public class MovementControl {
 	Command snakeCommands[];
