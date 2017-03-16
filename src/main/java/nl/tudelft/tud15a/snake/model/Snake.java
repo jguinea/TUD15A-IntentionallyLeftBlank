@@ -42,6 +42,9 @@ public class Snake implements CollisionListener {
     public Position getHead() {
         return position.get(0);
     }
+    public void setPosition(Position pos){
+    	position.set(0, pos);
+    }
 
     private void moveBody() {
         for (int z = size - 1; z > 0; z--) {

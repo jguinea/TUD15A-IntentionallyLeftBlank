@@ -10,9 +10,11 @@ import nl.tudelft.tud15a.snake.model.command.TurnLeft;
 import nl.tudelft.tud15a.snake.model.command.TurnRight;
 import nl.tudelft.tud15a.snake.model.decorator.Apple;
 import nl.tudelft.tud15a.snake.model.decorator.Fruit;
+
 import nl.tudelft.tud15a.snake.model.observer.CollisionListener;
 import nl.tudelft.tud15a.snake.model.observer.CollisionObservable;
 import nl.tudelft.tud15a.snake.model.observer.CollisionReason;
+
 
 public class Model extends CollisionObservable {
 	private MovementControl movementControl;
@@ -49,7 +51,9 @@ public class Model extends CollisionObservable {
 
     private void checkApple() {
         if ((snake.getHead().getX() == fruit.getPosition().getX()) && (snake.getHead().getY() == fruit.getPosition().getY())) {
+
             collision(CollisionReason.EAT_FRUIT);
+
         }
     }
 

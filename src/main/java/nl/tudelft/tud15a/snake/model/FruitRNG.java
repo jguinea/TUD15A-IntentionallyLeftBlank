@@ -17,7 +17,7 @@ public class FruitRNG implements CollisionListener {
     public void onCollision(CollisionReason reason) {
         Fruit fruit;
         if(Math.random() > 0.8) {
-            fruit = new Golden(new Apple());
+            fruit = new Golden(new Apple(), model.getSnake().getPoint());
         } else {
             fruit = new Apple();
         }
