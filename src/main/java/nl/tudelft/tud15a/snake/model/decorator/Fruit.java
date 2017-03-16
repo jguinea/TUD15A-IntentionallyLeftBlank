@@ -1,29 +1,18 @@
 package nl.tudelft.tud15a.snake.model.decorator;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-import javax.swing.ImageIcon;
-
 import nl.tudelft.tud15a.snake.model.Position;
-import nl.tudelft.tud15a.snake.model.Settings;
-
 
 public interface Fruit {
-    
-	Position getPosition();
 
+    Position getPosition();
 
-	void locate();
+    void locate();
 
+    void setImage(BufferedImage fruitImage);
 
-    public void setImage(BufferedImage fruitImage);
-    
-    public BufferedImage getImage();
-    
-    
-    
+    BufferedImage getImage();
 
-	int getPoints();
-
+    int getPoints();
 }

@@ -1,11 +1,11 @@
 package nl.tudelft.tud15a.snake.model;
 
-public enum Direction {
-    LEFT(0), RIGHT(1), UP(2), DOWN(3);
+public enum Speed {
+	SPEEDUP(4), SLOWDOWN(5), NOCHANGE(6);
 
 	int index;
 
-	Direction(int index) {
+	Speed(int index) {
 		this.index = index;
 	}
 

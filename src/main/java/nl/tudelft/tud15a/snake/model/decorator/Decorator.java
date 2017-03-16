@@ -1,16 +1,12 @@
 package nl.tudelft.tud15a.snake.model.decorator;
 
-import java.awt.Color;
-import java.awt.Image;
-
 import java.awt.image.BandCombineOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
 
-
-
 import nl.tudelft.tud15a.snake.model.Position;
+
 import nl.tudelft.tud15a.snake.model.Settings;
 import nl.tudelft.tud15a.snake.model.Snake;
 
@@ -22,8 +18,6 @@ public abstract class Decorator implements Fruit {
 		this.fruit =fruit;
 	}
 
-	
-
 
     public Position getPosition() {
         return fruit.getPosition();
@@ -33,8 +27,9 @@ public abstract class Decorator implements Fruit {
         fruit.locate();
     }
 
+    public abstract int getPoints();
 
-	public abstract int getPoints();
+   
 	
 	 public BufferedImage processImage(BufferedImage image, float[][] colorMatrix) {
 		    
@@ -58,4 +53,5 @@ public abstract class Decorator implements Fruit {
 		this.fruit.setImage(fruitImage);
 	}
 	
+
 }

@@ -1,6 +1,5 @@
 package nl.tudelft.tud15a.snake.model.decorator;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 public class Golden extends Metal {
@@ -25,13 +24,11 @@ public class Golden extends Metal {
 
 	@Override
 	public void setImage(BufferedImage fruitImage) {
-		// TODO Auto-generated method stub
 		super.fruit.setImage(fruitImage);
 	}
 
 	@Override
 	public BufferedImage getImage() {
-		// TODO Auto-generated method stub
 		return super.fruit.getImage();
 	}
 }
