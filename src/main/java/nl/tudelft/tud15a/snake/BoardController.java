@@ -102,7 +102,6 @@ public class BoardController implements ActionListener, CollisionListener {
             if (key == KeyEvent.VK_S) {
                 speed = Speed.SLOWDOWN;
             }
-
         }
     }
 }

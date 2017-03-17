@@ -10,6 +10,5 @@ public class SpeedNoChange implements Command {
         this.speedController = speedController;
     }
 
-    public void execute() {
-    }
+    public void execute() {}
 }

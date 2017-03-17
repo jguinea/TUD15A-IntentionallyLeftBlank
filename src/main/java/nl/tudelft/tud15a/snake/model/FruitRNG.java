@@ -8,12 +8,9 @@ import nl.tudelft.tud15a.snake.model.observer.CollisionReason;
 
 public class FruitRNG implements CollisionListener {
     private Model model;
-
-
     public FruitRNG(Model model) {
         this.model = model;
     }
-
     @Override
     public void onCollision(CollisionReason reason) {
         model.getEffectControler().executeAllCommand();
@@ -32,8 +29,6 @@ public class FruitRNG implements CollisionListener {
             model.getEffectControler().addCommand(new MultiplyCommand(model.getSnake(), new Golden(new Apple())));
             fruit = new Golden(fruit);
         }
-
-
         model.setFruit(fruit);
         fruit.locate();
     }
