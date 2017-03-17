@@ -27,7 +27,6 @@ public abstract class Decorator implements Fruit {
         return fruit.getPoints();
     }
 
-
     public BufferedImage processImage(BufferedImage image, float[][] colorMatrix) {
 
         BandCombineOp changeColors = new BandCombineOp(colorMatrix, null);
@@ -35,7 +34,6 @@ public abstract class Decorator implements Fruit {
         WritableRaster displayRaster = sourceRaster.createCompatibleWritableRaster();
         changeColors.filter(sourceRaster, displayRaster);
         return new BufferedImage(image.getColorModel(), displayRaster, true, null);
-
     }
 
     //apply a filter to change the color of an Image
@@ -73,8 +71,5 @@ public abstract class Decorator implements Fruit {
     public void combineBlur(Fruit fruit) {
         BufferedImage newIm = blurImage(fruit.getImage());
         this.setImage(newIm);
-
     }
-
-
 }

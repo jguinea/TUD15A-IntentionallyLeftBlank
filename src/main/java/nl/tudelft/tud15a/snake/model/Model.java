@@ -9,7 +9,6 @@ import nl.tudelft.tud15a.snake.model.observer.CollisionListener;
 import nl.tudelft.tud15a.snake.model.observer.CollisionObservable;
 import nl.tudelft.tud15a.snake.model.observer.CollisionReason;
 
-
 public class Model extends CollisionObservable {
     private MovementControl movementControl;
     private Snake snake;
@@ -37,7 +36,6 @@ public class Model extends CollisionObservable {
         this.addListener(snake);
         this.addListener(new FruitRNG(this));
         this.addListener(timerListener);
-
     }
 
     public void checkCollision() {
@@ -47,10 +45,7 @@ public class Model extends CollisionObservable {
 
     private void checkApple() {
         if ((snake.getHead().getX() == fruit.getPosition().getX()) && (snake.getHead().getY() == fruit.getPosition().getY())) {
-
             collision(CollisionReason.EAT_FRUIT);
-
-
         }
     }
 

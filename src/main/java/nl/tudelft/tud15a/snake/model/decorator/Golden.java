@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 
 public class Golden extends Metal {
 
-
     public Golden(Fruit fruit) {
         super(fruit);
         //yellow = red + green
@@ -18,7 +17,6 @@ public class Golden extends Metal {
         super.pointsMultiplier = 3;
     }
 
-
     @Override
     public void setImage(BufferedImage fruitImage) {
         super.fruit.setImage(fruitImage);
@@ -28,6 +26,4 @@ public class Golden extends Metal {
     public BufferedImage getImage() {
         return super.fruit.getImage();
     }
-
-
 }
