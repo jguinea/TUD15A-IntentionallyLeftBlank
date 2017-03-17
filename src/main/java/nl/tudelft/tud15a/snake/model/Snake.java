@@ -92,4 +92,7 @@ public class Snake implements CollisionListener {
     public int getPoint() {
         return points;
     }
+    public void setPoint(int points){
+    	this.points = points;
+    }
 }
