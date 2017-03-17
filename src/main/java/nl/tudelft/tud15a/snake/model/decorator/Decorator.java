@@ -11,13 +11,17 @@ import nl.tudelft.tud15a.snake.model.Position;
 
 import nl.tudelft.tud15a.snake.model.Settings;
 import nl.tudelft.tud15a.snake.model.Snake;
+import nl.tudelft.tud15a.snake.model.command.Command;
 
 public abstract class Decorator implements Fruit {
 	protected Fruit fruit;
 	protected float[][] colorMat;
+	
+	
 
 	Decorator(Fruit fruit) {
 		this.fruit =fruit;
+		
 	}
 
 
@@ -29,7 +33,9 @@ public abstract class Decorator implements Fruit {
         fruit.locate();
     }
 
-    public abstract int getPoints();
+    public int getPoints(){
+    	return fruit.getPoints();
+    }
 
    
 	

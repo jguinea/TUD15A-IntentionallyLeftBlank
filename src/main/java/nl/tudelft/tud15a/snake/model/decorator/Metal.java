@@ -1,22 +1,27 @@
 package nl.tudelft.tud15a.snake.model.decorator;
 
 import nl.tudelft.tud15a.snake.model.Snake;
+import nl.tudelft.tud15a.snake.model.command.Command;
 
 public abstract class Metal extends Decorator {
 	//abstract Class where the points are multiplied !!
-	protected int snakePoint;
-	Metal(Fruit fruit, int snakePoint) {
+	
+	protected int pointsMultiplier;
+	Metal(Fruit fruit) {
 		super(fruit);
 		// TODO Auto-generated constructor stub
-		this.snakePoint = snakePoint;
+		
 		
 	}
 
-	@Override
-	public abstract int getPoints();
-	public void setSnakePoint(int snakePoint){
-		this.snakePoint = snakePoint;
+	public int getPoints(){
+		return 0;
 	}
+	
+	public int getPointsMultiplier(){
+		return this.pointsMultiplier;
+	}
+	
 	
 
 }

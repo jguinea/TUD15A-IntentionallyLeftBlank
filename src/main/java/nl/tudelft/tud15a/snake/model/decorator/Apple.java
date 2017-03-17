@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import nl.tudelft.tud15a.snake.model.Position;
 import nl.tudelft.tud15a.snake.model.Settings;
+import nl.tudelft.tud15a.snake.model.command.EffectController;
 
 public class Apple implements Fruit {
 
@@ -58,5 +59,8 @@ public class Apple implements Fruit {
 	public void setSnakePoint(int snakePoint){
 		
 	}
+	//No command to add
+
+	
 
 }

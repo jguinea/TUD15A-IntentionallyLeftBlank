@@ -1,5 +1,6 @@
 package nl.tudelft.tud15a.snake.model;
 
+import nl.tudelft.tud15a.snake.model.command.EffectController;
 import nl.tudelft.tud15a.snake.model.command.MovementControl;
 import nl.tudelft.tud15a.snake.model.command.commands.GoDown;
 import nl.tudelft.tud15a.snake.model.command.commands.GoUp;
@@ -21,11 +22,13 @@ public class Model extends CollisionObservable {
     private Snake snake;
     private Fruit fruit;
     private SpeedController speedController;
+    private EffectController effectController;
     
     private State gameState = State.START_SCREEN;
 
     public Model(CollisionListener timerListener) {
-    	movementControl = new MovementControl(7);
+    	effectController = new EffectController();
+    	movementControl = new MovementControl(10);
         snake = new Snake(this);
         fruit = new Apple();
         speedController = new SpeedController();
@@ -53,6 +56,7 @@ public class Model extends CollisionObservable {
         if ((snake.getHead().getX() == fruit.getPosition().getX()) && (snake.getHead().getY() == fruit.getPosition().getY())) {
 
             collision(CollisionReason.EAT_FRUIT);
+            
 
         }
     }
@@ -94,5 +98,8 @@ public class Model extends CollisionObservable {
 
     public SpeedController getSpeedController() {
     	return speedController;
+    }
+    public EffectController getEffectControler(){
+    	return this.effectController;
     }
 }
