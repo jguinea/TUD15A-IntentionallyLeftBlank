@@ -1,16 +1,13 @@
 package nl.tudelft.tud15a.snake;
 
-import java.awt.EventQueue;
-
 import javax.swing.*;
-
-import nl.tudelft.tud15a.snake.view.Board;
-
+import java.awt.*;
 
 public class Game extends JFrame {
 
     public Game() {
-        add(new Board());
+        BoardController controller = new BoardController();
+        add(controller.getView());
 
         setResizable(false);
         pack();

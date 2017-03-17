@@ -4,13 +4,13 @@ import nl.tudelft.tud15a.snake.model.Snake;
 import nl.tudelft.tud15a.snake.model.command.Command;
 
 public class GoDown implements Command {
-	Snake snake;
+    private Snake snake;
 
-	public GoDown(Snake snake) {
-		this.snake = snake;
-	}
+    public GoDown(Snake snake) {
+        this.snake = snake;
+    }
 
-	public void execute() {
-		snake.moveDown();
-	}
+    public void execute() {
+        snake.moveDown();
+    }
 }

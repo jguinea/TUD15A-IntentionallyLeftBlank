@@ -1,63 +1,31 @@
 package nl.tudelft.tud15a.snake.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.Timer;
-
-import nl.tudelft.tud15a.snake.model.Direction;
 import nl.tudelft.tud15a.snake.model.Model;
 import nl.tudelft.tud15a.snake.model.Position;
 import nl.tudelft.tud15a.snake.model.Settings;
-import nl.tudelft.tud15a.snake.model.Speed;
-import nl.tudelft.tud15a.snake.model.State;
-import nl.tudelft.tud15a.snake.model.observer.CollisionListener;
-import nl.tudelft.tud15a.snake.model.observer.CollisionReason;
 
-public class Board extends JPanel implements ActionListener, CollisionListener {
-    private Model model = new Model(this);
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
 
-    private Direction direction;
-    private Direction prevDirection;
-    private Speed speed;
+public class BoardView extends JPanel {
+    private Model model;
 
-    private Timer timer;
     private Image bodyImage;
     private Image headImage;
 
-    public Board() {
-        addKeyListener(new TAdapter());
+    public BoardView(KeyAdapter keyAdapter) {
+        addKeyListener(keyAdapter);
         setBackground(Color.BLUE);
         setFocusable(true);
 
         setPreferredSize(new Dimension(Settings.WIDTH, Settings.HEIGHT));
         loadImages();
-        initGame();
     }
 
     private void loadImages() {
         bodyImage = new ImageIcon("src/main/java/nl/tudelft/tud15a/snake/view/images/body.jpg").getImage();
         headImage = new ImageIcon("src/main/java/nl/tudelft/tud15a/snake/view/images/head.jpg").getImage();
-    }
-
-    private void initGame() {
-        model = new Model(this);
-        direction = Direction.RIGHT;
-        prevDirection = Direction.RIGHT;
-        speed = Speed.NOCHANGE;
-        timer = new Timer(model.getSpeedController().getSpeed(), this);
-        timer.start();
     }
 
     @Override
@@ -123,7 +91,7 @@ public class Board extends JPanel implements ActionListener, CollisionListener {
         g.drawRect(0, Settings.HEIGHT - Settings.BORDER_THICKNESS, Settings.WIDTH, Settings.BORDER_THICKNESS);
         g.drawRect(0, 0, Settings.BORDER_THICKNESS, Settings.HEIGHT);
         g.drawRect(Settings.WIDTH - Settings.BORDER_THICKNESS, 0, Settings.BORDER_THICKNESS, Settings.HEIGHT);
-        
+
         g.drawImage(model.getFruit().getImage(), model.getFruit().getPosition().getX(),
                 model.getFruit().getPosition().getY(), this);
 
@@ -135,67 +103,7 @@ public class Board extends JPanel implements ActionListener, CollisionListener {
         Toolkit.getDefaultToolkit().sync();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (model.getState() == State.PLAYING) {
-            model.checkCollision();
-            timer.setDelay(model.getSpeedController().getSpeed());
-
-            if (model.getState() == State.GAME_OVER) {
-                timer.stop();
-            }
-            model.getMovementControl().pressOnButton(direction.getIndex());
-            model.getMovementControl().pressOnButton(speed.getIndex());
-            prevDirection = direction;
-            speed = Speed.NOCHANGE;
-        }
-
-        repaint();
-    }
-
-    @Override
-    public void onCollision(CollisionReason reason) {
-        if (reason == CollisionReason.GAME_OVER) {
-            timer.stop();
-        }
-    }
-
-    private class TAdapter extends KeyAdapter {
-        @Override
-        public void keyPressed(KeyEvent e) {
-
-            int key = e.getKeyCode();
-
-            if (model.getState() == State.GAME_OVER || model.getState() == State.START_SCREEN) {
-                if ((key == KeyEvent.VK_SPACE)) {
-                    initGame();
-                    model.setState(State.PLAYING);
-                }
-            }
-            if ((key == KeyEvent.VK_LEFT) && (prevDirection != Direction.RIGHT)) {
-                direction = Direction.LEFT;
-            }
-
-            if ((key == KeyEvent.VK_RIGHT) && (prevDirection != Direction.LEFT)) {
-                direction = Direction.RIGHT;
-            }
-
-            if ((key == KeyEvent.VK_UP) && (prevDirection != Direction.DOWN)) {
-                direction = Direction.UP;
-            }
-
-            if ((key == KeyEvent.VK_DOWN) && (prevDirection != Direction.UP)) {
-                direction = Direction.DOWN;
-            }
-
-            if (key == KeyEvent.VK_W) {
-            	speed = Speed.SPEEDUP;
-            }
-
-            if (key == KeyEvent.VK_S) {
-            	speed = Speed.SLOWDOWN;
-            }
-
-        }
+    public void setModel(Model model) {
+        this.model = model;
     }
 }
