@@ -1,12 +1,11 @@
 package nl.tudelft.tud15a.snake.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 import nl.tudelft.tud15a.snake.model.decorator.Fruit;
 import nl.tudelft.tud15a.snake.model.observer.CollisionListener;
 import nl.tudelft.tud15a.snake.model.observer.CollisionReason;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Snake implements CollisionListener {
     public List<Position> position = new ArrayList<>(Settings.ALL_CELLS);
@@ -16,7 +15,7 @@ public class Snake implements CollisionListener {
 
     public Snake(Model model) {
         this.model = model;
-    	points = 0;
+        points = 0;
         size = 3;
         for (int z = 0; z < size; z++) {
             position.add(new Position(50 - z * 10, 50));
@@ -42,8 +41,9 @@ public class Snake implements CollisionListener {
     public Position getHead() {
         return position.get(0);
     }
-    public void setPosition(Position pos){
-    	position.set(0, pos);
+
+    public void setPosition(Position pos) {
+        position.set(0, pos);
     }
 
     private void moveBody() {
@@ -54,23 +54,23 @@ public class Snake implements CollisionListener {
     }
 
     public void moveLeft() {
-    	moveBody();
-    	getHead().setX(getHead().getX() - Settings.CELL_SIZE);
+        moveBody();
+        getHead().setX(getHead().getX() - Settings.CELL_SIZE);
     }
 
     public void moveRight() {
-    	moveBody();
-    	getHead().setX(getHead().getX() + Settings.CELL_SIZE);
+        moveBody();
+        getHead().setX(getHead().getX() + Settings.CELL_SIZE);
     }
 
     public void moveUp() {
-    	moveBody();
-    	getHead().setY(getHead().getY() - Settings.CELL_SIZE);
+        moveBody();
+        getHead().setY(getHead().getY() - Settings.CELL_SIZE);
     }
 
     public void moveDown() {
-    	moveBody();
-    	getHead().setY(getHead().getY() + Settings.CELL_SIZE);
+        moveBody();
+        getHead().setY(getHead().getY() + Settings.CELL_SIZE);
     }
 
     public boolean isEatingYourself() {
@@ -84,7 +84,7 @@ public class Snake implements CollisionListener {
 
     @Override
     public void onCollision(CollisionReason reason) {
-        if(reason == CollisionReason.EAT_FRUIT) {
+        if (reason == CollisionReason.EAT_FRUIT) {
             eatApple(model.getFruit());
         }
     }
@@ -92,7 +92,8 @@ public class Snake implements CollisionListener {
     public int getPoint() {
         return points;
     }
-    public void setPoint(int points){
-    	this.points = points;
+
+    public void setPoint(int points) {
+        this.points = points;
     }
 }

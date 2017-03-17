@@ -1,10 +1,8 @@
 package nl.tudelft.tud15a.snake.model.decorator;
 
-import java.awt.image.BufferedImage;
-
 import nl.tudelft.tud15a.snake.model.Position;
-import nl.tudelft.tud15a.snake.model.command.Command;
-import nl.tudelft.tud15a.snake.model.command.EffectController;
+
+import java.awt.image.BufferedImage;
 
 public interface Fruit {
 
@@ -17,6 +15,6 @@ public interface Fruit {
     BufferedImage getImage();
 
     int getPoints();
-    
-    
+
+
 }
