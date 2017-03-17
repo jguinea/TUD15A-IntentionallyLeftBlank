@@ -83,7 +83,7 @@ public class BoardView extends JPanel {
         Font small = new Font("Helvetica", Font.BOLD, 14);
         g.setColor(Color.white);
         g.setFont(small);
-        g.drawString(scores, Settings.WIDTH - 80, Settings.HEIGHT - 10);
+        g.drawString(scores, 10, Settings.HEIGHT - 10);
 
         //Borders of the Fields
         g.setColor(Color.GREEN);
